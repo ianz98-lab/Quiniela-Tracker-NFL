@@ -117,7 +117,8 @@ tr.me .rk{color:var(--orange)}
 
 /* Tabla completa */
 .jump{display:inline-block;margin:8px 2px 0;font-size:13px;font-weight:600;color:var(--ink);text-decoration:none;border:1px solid var(--line);background:var(--surface);border-radius:16px;padding:5px 12px}
-.gridwrap{overflow-x:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+.vscroll{position:relative;max-height:min(52vh,380px);overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-y:contain}
+.gridwrap{position:relative;max-height:min(62vh,460px);overflow:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
 .full{border-collapse:separate;border-spacing:0;font-size:12px}
 .full th,.full td{padding:0;border-bottom:1px solid var(--line);text-align:center}
 .full thead th{position:sticky;top:0;background:var(--sheet-soft);z-index:2;font-weight:600;vertical-align:bottom}
@@ -181,13 +182,13 @@ button:focus-visible,select:focus-visible{outline:2px solid var(--orange);outlin
   <section>
     <h2>Posiciones de la semana</h2>
     <p class="sub">Barra oscura: aciertos en juegos terminados. Clara: en juegos que van en curso.</p>
-    <table class="stand"><tbody id="stand"></tbody></table>
+    <div class="vscroll" id="standwrap"><table class="stand"><tbody id="stand"></tbody></table></div>
   </section>
 
   <section id="tabla">
     <h2>Tabla de la semana</h2>
     <p class="sub">Todos contra todos, juegos ordenados por hora. Toca un nombre para ver sus tarjetas o un juego para ir a su tarjeta.</p>
-    <div class="gridwrap"><table class="full" id="full"></table></div>
+    <div class="gridwrap" id="gridwrap"><table class="full" id="full"></table></div>
     <div class="gridlegend">
       <span style="--c:var(--win)">Acierto</span><span style="--c:var(--loss)">Fallo</span>
       <span style="--c:repeating-linear-gradient(45deg,var(--win) 0 3px,var(--loss) 3px 6px)">En juego (rayado)</span>
@@ -329,7 +330,7 @@ function render(){
   requestAnimationFrame(()=>{ goTo(target,false); updateNav(); });
   firstRender=false;
   lastList=list; lastRanking=ranking;
-  requestAnimationFrame(()=>renderFull(list,ranking));
+  requestAnimationFrame(()=>{ renderFull(list,ranking); showMe("gridwrap"); showMe("standwrap"); });
 
   document.getElementById("stand").innerHTML = ranking.map(r=>`
     <tr class="${r.name===selected?"me":""}"><td class="rk">${r.rank}</td>
@@ -351,6 +352,14 @@ function renderFull(list, ranking){
   const t=document.getElementById("full"); t.innerHTML=head+body;
   t.querySelectorAll(".colh").forEach(b=>b.onclick=()=>{ document.querySelector(".carhead").scrollIntoView({behavior:"smooth",block:"start"}); goTo(+b.dataset.k,true); });
   t.querySelectorAll(".who-c button").forEach(b=>b.onclick=()=>{ selected=b.dataset.n; sel.value=selected; try{localStorage.setItem("q-sel",selected)}catch(e){}; render(); document.querySelector(".board").scrollIntoView({behavior:"smooth"}); });
+}
+
+function showMe(wrapId){
+  const w=document.getElementById(wrapId), r=w && w.querySelector("tr.me");
+  if(!r) return;
+  const head = w.querySelector("thead"); const off = head ? head.offsetHeight : 0;
+  if(r.offsetTop < w.scrollTop + off || r.offsetTop + r.offsetHeight > w.scrollTop + w.clientHeight)
+    w.scrollTop = Math.max(0, r.offsetTop - off - (w.clientHeight-off)/2 + r.offsetHeight/2);
 }
 async function tick(){ await load(); render(); }
 tick();
