@@ -148,7 +148,7 @@ tr.me .rk{color:var(--orange)}
 
 
 /* Pestañas */
-.tabs{display:flex;gap:6px;margin:12px 0 0;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:4px}
+.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;box-shadow:0 2px 8px rgba(0,0,0,.12);display:flex;gap:6px;margin:12px 0 0;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:4px}
 .tabs a{flex:1;text-align:center;padding:8px 6px;border-radius:7px;text-decoration:none;color:var(--muted);font-family:var(--cond);font-weight:700;font-size:17px}
 .tabs a.on{background:var(--navy);color:#fff}
 body.v-temporada .only-week{display:none}
@@ -247,8 +247,8 @@ button:focus-visible,select:focus-visible{outline:2px solid var(--orange);outlin
   <p class="note">Marcadores de ESPN, se actualizan solos cada minuto mientras hay juegos. Los juegos en curso cuentan como van. Local en mayúsculas.</p>
 </div>
 
-<script src="data.js"></script>
-<script src="temporada.js"></script>
+<script src="data.js?v=20260928b"></script>
+<script src="temporada.js?v=20260928b"></script>
 <script>
 (function(){
 const Q = window.QUINIELA;
