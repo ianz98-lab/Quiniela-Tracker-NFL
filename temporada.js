@@ -1,9 +1,50 @@
 // Semanas cerradas: aciertos finales por participante (nombre igual que en data.js).
 // La semana activa NO va aquí: se calcula en vivo desde data.js. Al cerrarla se congela aquí.
-// puntos:null = semana pendiente de cargar.
 window.TEMPORADA = {
   semanas: [
-    {n:1, puntos:null},
-    {n:2, puntos:null}
+    {n:1, puntos:{
+      "Andrés De León":8,
+      "Arturo Zimeri / Xavier Zimeri":8,
+      "Carlos Noguera / Ignacio Noguera":6,
+      "Edgar Bran / Andrés Bran":9,
+      "Edgar Sarceño / Mario Zirion":7,
+      "Federico Zimeri":6,
+      "Gerardo Villa e hijos":8,
+      "German García / Carlos Abreu":8,
+      "Gustavo Anzueto / Guille Anzueto":6,
+      "J.C. Sandoval / J.C. Sandoval Jr.":7,
+      "Javier Arzú Pérez":12,
+      "Joe Pasarelli / Everst Figueroa":8,
+      "José Gabriel Cummings":9,
+      "José Luis Contreras / Diego Contreras":12,
+      "José Porres":7,
+      "Luis Grazioso / Luigi Grazioso":9,
+      "Luis Herrera / Orlando Diab":8,
+      "Mario Zedan":9,
+      "Stuardo Zimeri / Ian Zimeri":11,
+      "Willy Zaid / Guille Zaid":8
+    }},
+    {n:2, puntos:{
+      "Andrés De León":11,
+      "Arturo Zimeri / Xavier Zimeri":7,
+      "Carlos Noguera / Ignacio Noguera":9,
+      "Edgar Bran / Andrés Bran":9,
+      "Edgar Sarceño / Mario Zirion":6,
+      "Federico Zimeri":9,
+      "Gerardo Villa e hijos":7,
+      "German García / Carlos Abreu":8,
+      "Gustavo Anzueto / Guille Anzueto":7,
+      "J.C. Sandoval / J.C. Sandoval Jr.":8,
+      "Javier Arzú Pérez":7,
+      "Joe Pasarelli / Everst Figueroa":8,
+      "José Gabriel Cummings":7,
+      "José Luis Contreras / Diego Contreras":7,
+      "José Porres":7,
+      "Luis Grazioso / Luigi Grazioso":4,
+      "Luis Herrera / Orlando Diab":9,
+      "Mario Zedan":5,
+      "Stuardo Zimeri / Ian Zimeri":7,
+      "Willy Zaid / Guille Zaid":7
+    }}
   ]
 };
