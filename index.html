@@ -146,6 +146,39 @@ tr.me .rk{color:var(--orange)}
 .gridlegend{display:flex;flex-wrap:wrap;gap:12px;padding:10px 14px 12px;font-size:12px;color:var(--muted);border-top:1px solid var(--line)}
 .gridlegend span::before{content:"";display:inline-block;width:12px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px;background:var(--c)}
 
+
+/* Pestañas */
+.tabs{display:flex;gap:6px;margin:12px 0 0;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:4px}
+.tabs a{flex:1;text-align:center;padding:8px 6px;border-radius:7px;text-decoration:none;color:var(--muted);font-family:var(--cond);font-weight:700;font-size:17px}
+.tabs a.on{background:var(--navy);color:#fff}
+body.v-temporada .only-week{display:none}
+body:not(.v-temporada) .only-season{display:none}
+
+/* Temporada */
+.season{border-collapse:separate;border-spacing:0;font-size:13px}
+.season th,.season td{border-bottom:1px solid var(--line);text-align:center;padding:0}
+.season thead th{position:sticky;top:0;background:var(--sheet-soft);z-index:2;font-weight:600;font-size:11px;color:var(--muted);padding:7px 4px;vertical-align:bottom}
+.season .sn{position:sticky;left:0;z-index:3;background:var(--surface);text-align:left;border-right:1px solid var(--line);min-width:150px;max-width:150px}
+.season thead .sn{background:var(--sheet-soft);z-index:4;padding:7px 8px}
+.season .sn button{all:unset;display:flex;align-items:center;gap:6px;width:100%;padding:7px 8px;cursor:pointer;box-sizing:border-box}
+.season .sn .r{font-family:var(--cond);font-weight:700;color:var(--muted);min-width:18px;text-align:right}
+.season .sn .n{flex:1;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;line-height:1.2;font-size:12px}
+.season .mv{font-size:10px;font-weight:700;min-width:18px;text-align:right}
+.season .mv.up{color:var(--win)} .season .mv.dn{color:var(--loss)}
+.season .tot{font-family:var(--cond);font-weight:800;font-size:20px;min-width:46px;border-right:1px solid var(--line)}
+.season .gap{font-size:11px;color:var(--muted);min-width:40px}
+.season .wk{font-family:var(--cond);font-weight:700;font-size:15px;min-width:40px}
+.season .wk.best{background:var(--win-soft);color:var(--win)}
+.season .wk.live{background:repeating-linear-gradient(45deg,var(--sheet-soft) 0 4px,transparent 4px 8px)}
+.season .wk.na{color:var(--line)}
+.season tr.me .sn,.season tr.me td{background:var(--orange-soft)}
+.season tr.me .n{font-weight:700} .season tr.me .r{color:var(--orange)}
+.sumgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border-top:1px solid var(--line)}
+.sumgrid div{background:var(--surface);padding:10px 12px}
+.sumgrid .k{font-size:11.5px;color:var(--muted)}
+.sumgrid .v{font-family:var(--cond);font-weight:800;font-size:24px;line-height:1.1}
+.warn{margin:0;padding:10px 14px;font-size:12.5px;background:var(--orange-soft);border-bottom:1px solid var(--line)}
+
 button:focus-visible,select:focus-visible{outline:2px solid var(--orange);outline-offset:2px}
 @media (min-width:700px){.card{flex-basis:46%}}
 </style>
@@ -162,12 +195,14 @@ button:focus-visible,select:focus-visible{outline:2px solid var(--orange);outlin
     </div>
   </header>
 
-  <a class="jump" href="#tabla">Ver tabla de todos ↓</a>
+  <nav class="tabs" aria-label="Vista"><a href="#semana" id="t-sem">Semana</a><a href="#temporada" id="t-tem">Temporada</a></nav>
+  <a class="jump only-week" href="#tabla">Ver tabla de todos ↓</a>
   <div class="pick-who">
     <label for="sel">Ver pronósticos de</label>
     <select id="sel"></select>
   </div>
 
+  <div class="only-week">
   <div class="strip" id="strip" role="tablist" aria-label="Juegos por hora"></div>
 
   <div class="carhead">
@@ -195,10 +230,25 @@ button:focus-visible,select:focus-visible{outline:2px solid var(--orange);outlin
       <span style="--c:var(--pend-soft)">Por jugarse</span>
     </div>
   </section>
+  </div>
+
+  <div class="only-season">
+    <section>
+      <h2>Tabla general de la temporada</h2>
+      <p class="sub">Aciertos por semana y acumulado. Verde: el más alto de esa semana. Rayado: semana en curso, cuenta como va. Toca un nombre para seguirlo.</p>
+      <p class="warn" id="swarn" hidden></p>
+      <div class="gridwrap" id="seasonwrap"><table class="season" id="season"></table></div>
+    </section>
+    <section>
+      <h2 id="sumh">Resumen</h2>
+      <div class="sumgrid" id="sum"></div>
+    </section>
+  </div>
   <p class="note">Marcadores de ESPN, se actualizan solos cada minuto mientras hay juegos. Los juegos en curso cuentan como van. Local en mayúsculas.</p>
 </div>
 
 <script src="data.js"></script>
+<script src="temporada.js"></script>
 <script>
 (function(){
 const Q = window.QUINIELA;
@@ -275,6 +325,75 @@ let navT; cardsEl.addEventListener("scroll",()=>{clearTimeout(navT);navT=setTime
 document.getElementById("prev").onclick=()=>goTo(currentIndex()-1,true);
 document.getElementById("next").onclick=()=>goTo(currentIndex()+1,true);
 
+
+const T = window.TEMPORADA || {semanas:[]};
+let view = location.hash==="#temporada" ? "temporada" : "semana";
+function setView(v){
+  view=v; document.body.classList.toggle("v-temporada",v==="temporada");
+  document.getElementById("t-sem").classList.toggle("on",v==="semana");
+  document.getElementById("t-tem").classList.toggle("on",v==="temporada");
+  document.getElementById("t-sem").textContent = `Semana ${Q.semana}`;
+}
+window.addEventListener("hashchange",()=>{ if(location.hash==="#semana"||location.hash==="#temporada"){ setView(location.hash.slice(1)); render(); window.scrollTo(0,0);} });
+setView(view);
+
+function seasonTable(weekRanking){
+  const weekDone = games.every(g=>g.state==="post");
+  // semanas: cerradas desde temporada.js + la activa en vivo desde data.js
+  const weeks = [];
+  const maxW = Math.max(Q.semana, ...T.semanas.map(w=>w.n));
+  for(let n=1;n<=maxW;n++){
+    if(n===Q.semana){
+      const pts={}; weekRanking.forEach(r=>pts[r.name]=r.tot);
+      weeks.push({n,pts,live:!weekDone,loaded:true});
+    } else {
+      const w=T.semanas.find(x=>x.n===n);
+      weeks.push({n,pts:(w&&w.puntos)||{},live:false,loaded:!!(w&&w.puntos)});
+    }
+  }
+  const names = [...new Set([...parts.map(p=>p.name), ...weeks.flatMap(w=>Object.keys(w.pts))])];
+  const cum = (name,upto) => weeks.filter(w=>w.n<=upto).reduce((a,w)=>a+(w.pts[name]||0),0);
+  const rankAt = upto => { const arr=names.map(n=>({n,t:cum(n,upto)})).sort((a,b)=>b.t-a.t); const m={}; let rk=0,pv=null; arr.forEach((x,i)=>{ if(x.t!==pv){rk=i+1;pv=x.t;} m[x.n]=rk; }); return m; };
+  const loadedNs = weeks.filter(w=>w.loaded).map(w=>w.n);
+  const lastN = loadedNs[loadedNs.length-1], prevN = loadedNs[loadedNs.length-2];
+  const now = rankAt(lastN), before = prevN ? rankAt(prevN) : null;
+  const best = weeks.map(w=>w.loaded ? Math.max(...names.map(n=>w.pts[n]??-1)) : null);
+  const rows = names.map(n=>({name:n,tot:cum(n,lastN),rank:now[n],mv:before?before[n]-now[n]:0,
+    weeks:weeks.map((w,j)=>({v:w.loaded?(w.pts[n]??null):null,live:w.live,best:w.loaded&&!w.live&&w.pts[n]===best[j]&&best[j]>=0})),
+    won:weeks.filter((w,j)=>w.loaded&&!w.live&&w.pts[n]===best[j]).length}))
+    .sort((a,b)=>b.tot-a.tot||a.name.localeCompare(b.name));
+  return {rows,weeks,missing:weeks.filter(w=>!w.loaded).map(w=>w.n)};
+}
+
+function renderSeason(weekRanking){
+  const {rows,weeks,missing} = seasonTable(weekRanking);
+  const lead = rows[0].tot;
+  const warn=document.getElementById("swarn");
+  warn.hidden = !missing.length;
+  warn.textContent = missing.length ? `Faltan los aciertos de la${missing.length>1?"s":""} semana${missing.length>1?"s":""} ${missing.join(" y ")}; el acumulado todavía no las incluye.` : "";
+  const head = `<thead><tr><th class="sn">Participante</th><th>Total</th><th>Dif.</th>${weeks.map(w=>`<th>S${w.n}${w.live?"<br>en curso":""}</th>`).join("")}<th>Sem.<br>ganadas</th></tr></thead>`;
+  const body = `<tbody>${rows.map(r=>`<tr class="${r.name===selected?"me":""}">
+    <td class="sn"><button type="button" data-n="${esc(r.name)}"><span class="r">${r.rank}</span><span class="n">${esc(r.name)}</span><span class="mv ${r.mv>0?"up":r.mv<0?"dn":""}">${r.mv>0?"▲"+r.mv:r.mv<0?"▼"+(-r.mv):""}</span></button></td>
+    <td class="tot">${r.tot}</td><td class="gap">${r.tot===lead?"—":"−"+(lead-r.tot)}</td>
+    ${r.weeks.map(c=>`<td class="wk${c.v==null?" na":""}${c.live?" live":""}${c.best?" best":""}">${c.v==null?"·":c.v}</td>`).join("")}
+    <td class="wk">${r.won||""}</td></tr>`).join("")}</tbody>`;
+  const t=document.getElementById("season"); t.innerHTML=head+body;
+  t.querySelectorAll(".sn button").forEach(b=>b.onclick=()=>{ selected=b.dataset.n; sel.value=selected; try{localStorage.setItem("q-sel",selected)}catch(e){}; render(); });
+  requestAnimationFrame(()=>showMe("seasonwrap"));
+
+  const me = rows.find(r=>r.name===selected);
+  const tied = rows.filter(r=>r.tot===me.tot).length;
+  const played = me.weeks.filter(c=>c.v!=null&&!c.live);
+  const bestW = played.length ? Math.max(...played.map(c=>c.v)) : null;
+  const avg = played.length ? (played.reduce((a,c)=>a+c.v,0)/played.length).toFixed(1) : "–";
+  document.getElementById("sumh").textContent = me.name;
+  document.getElementById("sum").innerHTML = [
+    ["Lugar",`${me.rank}º${tied>1?" (empate)":""}`],["Total",me.tot],["Detrás del líder",me.tot===lead?"Líder":lead-me.tot],
+    ["Promedio por semana",avg],["Mejor semana",bestW??"–"],["Semanas ganadas",me.won]
+  ].map(([k,v])=>`<div><div class="k">${k}</div><div class="v">${v}</div></div>`).join("");
+  return me;
+}
+
 function render(){
   const keep = firstRender ? null : currentIndex();
   const ranking = parts.map(p=>({...p,...scoreFor(p)})).sort((a,b)=>b.tot-a.tot||b.fin-a.fin||a.name.localeCompare(b.name));
@@ -291,6 +410,17 @@ function render(){
   document.getElementById("status").textContent = source==="espn"
     ? `${live?"En vivo":"Actualizado"} ${lastOk.toLocaleTimeString("es-GT",{hour:"numeric",minute:"2-digit"})} · ${played} de ${games.length} juegos`
     : `Sin conexión a ESPN · marcadores al ${Q.respaldo.corte}`;
+
+  const sme = renderSeason(ranking);
+  if(view==="temporada"){
+    document.getElementById("title").textContent = `Temporada ${Q.temporada}`;
+    document.getElementById("rec").textContent = sme.tot;
+    document.getElementById("reccap").textContent = `aciertos acumulados · semana ${Q.semana}${games.every(g=>g.state==="post")?" cerrada":" en curso"}`;
+    const st = sme.tot, tiedS = document.querySelectorAll("#season tbody tr").length && [...document.querySelectorAll("#season .tot")].filter(td=>+td.textContent===st).length;
+    document.getElementById("pos").textContent = `${sme.rank}º general` + (tiedS>1?` · empate con ${tiedS-1}`:"");
+  } else {
+    document.getElementById("title").textContent = `Semana ${Q.semana}`;
+  }
 
   const list = ordered();
   const cls = list.map(g=>{ const c=cover(g); if(!c) return "p"; const hit=low(player.picks[g.i])===c; return (g.state==="post"?"":"p")+(hit?"w":"l"); });
