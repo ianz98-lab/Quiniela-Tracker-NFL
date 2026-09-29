@@ -1,5 +1,5 @@
 // Semanas cerradas: aciertos finales por participante (nombre igual que en data.js).
-// La semana activa NO va aquí: se calcula en vivo desde data.js. Al cerrarla se congela aquí.
+// La semana en curso NO va aquí: se calcula en vivo desde data.js. Al cerrarla se congela aquí.
 window.TEMPORADA = {
   semanas: [
     {n:1, puntos:{
@@ -45,6 +45,28 @@ window.TEMPORADA = {
       "Mario Zedan":5,
       "Stuardo Zimeri / Ian Zimeri":7,
       "Willy Zaid / Guille Zaid":7
+    }},
+    {n:3, puntos:{
+      "Andrés De León":6,
+      "Arturo Zimeri / Xavier Zimeri":8,
+      "Carlos Noguera / Ignacio Noguera":9,
+      "Edgar Bran / Andrés Bran":6,
+      "Edgar Sarceño / Mario Zirion":8,
+      "Federico Zimeri":8,
+      "Gerardo Villa e hijos":5,
+      "German García / Carlos Abreu":5,
+      "Gustavo Anzueto / Guille Anzueto":8,
+      "J.C. Sandoval / J.C. Sandoval Jr.":10,
+      "Javier Arzú Pérez":6,
+      "Joe Pasarelli / Everst Figueroa":10,
+      "José Gabriel Cummings":5,
+      "José Luis Contreras / Diego Contreras":7,
+      "José Porres":8,
+      "Luis Grazioso / Luigi Grazioso":8,
+      "Luis Herrera / Orlando Diab":6,
+      "Mario Zedan":7,
+      "Stuardo Zimeri / Ian Zimeri":10,
+      "Willy Zaid / Guille Zaid":9
     }}
   ]
 };
