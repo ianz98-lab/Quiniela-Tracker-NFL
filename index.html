@@ -2,6 +2,10 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
+<meta name="description" content="Quiniela NFL: marcadores en vivo, posiciones de la semana y tabla general de la temporada.">
+<meta property="og:title" content="Quiniela NFL 2026">
+<meta property="og:description" content="Marcadores en vivo, posiciones de la semana y tabla general.">
+<meta name="theme-color" content="#1F3A5F">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Quiniela NFL</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏈</text></svg>">
@@ -26,6 +30,7 @@
 }
 html{scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:Barlow,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:1.4;-webkit-font-smoothing:antialiased}
 .wrap{max-width:760px;margin:0 auto;padding:14px 14px 40px}
 
@@ -41,9 +46,9 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:Barlow,"Segoe UI
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(76,214,143,.6)}70%{box-shadow:0 0 0 7px rgba(76,214,143,0)}100%{box-shadow:0 0 0 0 rgba(76,214,143,0)}}
 @media (prefers-reduced-motion: reduce){.dot.live{animation:none}}
 .scoreline{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-top:14px}
-.pos{white-space:nowrap;background:var(--orange);color:#1b1206;font-family:var(--cond);font-weight:700;font-size:17px;line-height:1.15;padding:5px 10px;border-radius:5px}
-.record{text-align:right}
-.record .big{font-family:var(--cond);font-weight:800;font-size:64px;line-height:.85}
+.pos{min-width:0;background:var(--orange);color:#1b1206;font-family:var(--cond);font-weight:700;font-size:17px;line-height:1.15;padding:5px 10px;border-radius:5px}
+.record{text-align:right;flex:none}
+.record .big{font-family:var(--cond);font-weight:800;font-size:clamp(46px,14vw,64px);line-height:.85;white-space:nowrap}
 .record .cap{font-size:12px;opacity:.85;margin-top:4px}
 
 .pick-who{margin:14px 2px 0}
@@ -116,7 +121,7 @@ tr.me .rk{color:var(--orange)}
 .note{color:var(--muted);font-size:12px;margin:16px 2px 0}
 
 /* Tabla completa */
-.jump{display:inline-block;margin:8px 2px 0;font-size:13px;font-weight:600;color:var(--ink);text-decoration:none;border:1px solid var(--line);background:var(--surface);border-radius:16px;padding:5px 12px}
+.jump{cursor:pointer;font-family:inherit;display:inline-block;margin:8px 2px 0;font-size:13px;font-weight:600;color:var(--ink);text-decoration:none;border:1px solid var(--line);background:var(--surface);border-radius:16px;padding:5px 12px}
 .vscroll{position:relative;max-height:min(52vh,380px);overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-y:contain}
 .gridwrap{position:relative;max-height:min(62vh,460px);overflow:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
 .full{border-collapse:separate;border-spacing:0;font-size:12px}
@@ -149,8 +154,15 @@ tr.me .rk{color:var(--orange)}
 
 /* Pestañas */
 .tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;box-shadow:0 2px 8px rgba(0,0,0,.12);display:flex;gap:6px;margin:12px 0 0;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:4px}
-.tabs a{flex:1;text-align:center;padding:8px 6px;border-radius:7px;text-decoration:none;color:var(--muted);font-family:var(--cond);font-weight:700;font-size:17px}
-.tabs a.on{background:var(--navy);color:#fff}
+.tabs a,.tabs .tab{flex:1;text-align:center;padding:8px 6px;border-radius:7px;text-decoration:none;color:var(--muted);font-family:var(--cond);font-weight:700;font-size:17px;position:relative}
+.tabs a.on,.tabs .tab.on{background:var(--navy);color:#fff}
+.tabs .tab{padding:0;display:flex}
+.tabs .tab select{all:unset;flex:1;cursor:pointer;padding:8px 26px 8px 10px;text-align:center;text-align-last:center;font:inherit;color:inherit;border-radius:7px;min-width:0}
+.tabs .tab::after{content:"▾";position:absolute;right:10px;top:50%;transform:translateY(-52%);font-size:14px;pointer-events:none}
+.tabs .tab select option{color:#172536;background:#fff;font-family:Barlow,Arial,sans-serif;font-weight:600}
+.tabs a:hover,.tabs .tab:hover{color:var(--ink)} .tabs a.on:hover,.tabs .tab.on:hover{color:#fff}
+.tabs .tab:focus-within{outline:2px solid var(--orange);outline-offset:1px}
+.empty{padding:22px 14px;text-align:center;color:var(--muted);font-size:13.5px}
 body.v-temporada .only-week{display:none}
 body:not(.v-temporada) .only-season{display:none}
 
@@ -180,7 +192,44 @@ body:not(.v-temporada) .only-season{display:none}
 .warn{margin:0;padding:10px 14px;font-size:12.5px;background:var(--orange-soft);border-bottom:1px solid var(--line)}
 
 button:focus-visible,select:focus-visible{outline:2px solid var(--orange);outline-offset:2px}
-@media (min-width:700px){.card{flex-basis:46%}}
+.nav button:not(:disabled):hover,.jump:hover{border-color:var(--sheet);background:var(--sheet-soft)}
+.topbar{display:block}
+.card.nopick .mypick{background:var(--surface)}
+
+/* Tableta */
+@media (min-width:700px){
+  .card{flex-basis:46%}
+  .wrap{padding:18px 20px 48px}
+  .cards{padding:2px 20px 10px;margin:0 -20px}
+}
+/* Computadora */
+@media (min-width:1000px){
+  body{font-size:15.5px}
+  .wrap{max-width:1240px;padding:24px 32px 56px}
+  .board{padding:20px 26px 24px}
+  .board h1{font-size:38px}
+  .record .big{font-size:76px}
+  .topbar{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:16px;align-items:end;margin-top:14px}
+  .topbar .tabs{margin:0}
+  .topbar .pick-who{margin:0}
+  .jump{display:none}
+  .cards{padding:2px 0 12px;margin:0}
+  .card{flex-basis:calc((100% - 24px)/3);max-width:none}
+  .strip button{height:12px}
+  .weekgrid{display:grid;grid-template-columns:380px minmax(0,1fr);gap:18px;align-items:start}
+  .weekgrid section{margin-top:18px}
+  .weekgrid.solo{grid-template-columns:minmax(0,560px)}
+  .vscroll{max-height:620px}
+  .gridwrap{max-height:620px}
+  .seasongrid{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:18px;align-items:start}
+  .seasongrid section{margin-top:18px}
+  .seasongrid .sumgrid{grid-template-columns:repeat(2,1fr)}
+  #seasonwrap{max-height:680px}
+  .colh{min-width:52px}
+  .season .wk{min-width:48px}
+}
+@media (min-width:1400px){ .card{flex-basis:calc((100% - 36px)/4)} }
+@media (hover:hover){ .cards{scrollbar-width:thin} .cards::-webkit-scrollbar{display:block;height:8px} .cards::-webkit-scrollbar-thumb{background:var(--line);border-radius:4px} }
 </style>
 </head>
 <body>
@@ -195,12 +244,17 @@ button:focus-visible,select:focus-visible{outline:2px solid var(--orange);outlin
     </div>
   </header>
 
-  <nav class="tabs" aria-label="Vista"><a href="#semana" id="t-sem">Semana</a><a href="#temporada" id="t-tem">Temporada</a></nav>
-  <a class="jump only-week" href="#tabla">Ver tabla de todos ↓</a>
-  <div class="pick-who">
-    <label for="sel">Ver pronósticos de</label>
-    <select id="sel"></select>
+  <div class="topbar">
+    <nav class="tabs" aria-label="Vista">
+      <div class="tab" id="t-sem"><select id="wsel" aria-label="Escoger semana"></select></div>
+      <a href="#temporada" id="t-tem">Temporada</a>
+    </nav>
+    <div class="pick-who">
+      <label for="sel">Ver pronósticos de</label>
+      <select id="sel"></select>
+    </div>
   </div>
+  <button type="button" class="jump only-week" id="jump">Ver tabla de todos ↓</button>
 
   <div class="only-week">
   <div class="strip" id="strip" role="tablist" aria-label="Juegos por hora"></div>
@@ -214,6 +268,7 @@ button:focus-visible,select:focus-visible{outline:2px solid var(--orange);outlin
   </div>
   <div class="cards" id="cards" aria-live="off"></div>
 
+  <div class="weekgrid">
   <section>
     <h2>Posiciones de la semana</h2>
     <p class="sub">Barra oscura: aciertos en juegos terminados. Clara: en juegos que van en curso.</p>
@@ -231,8 +286,9 @@ button:focus-visible,select:focus-visible{outline:2px solid var(--orange);outlin
     </div>
   </section>
   </div>
+  </div>
 
-  <div class="only-season">
+  <div class="only-season"><div class="seasongrid">
     <section>
       <h2>Tabla general de la temporada</h2>
       <p class="sub">Aciertos por semana y acumulado. Verde: el más alto de esa semana. Rayado: semana en curso, cuenta como va. Toca un nombre para seguirlo.</p>
@@ -243,43 +299,101 @@ button:focus-visible,select:focus-visible{outline:2px solid var(--orange);outlin
       <h2 id="sumh">Resumen</h2>
       <div class="sumgrid" id="sum"></div>
     </section>
-  </div>
+  </div></div>
   <p class="note">Marcadores de ESPN, se actualizan solos cada minuto mientras hay juegos. Los juegos en curso cuentan como van. Local en mayúsculas.</p>
 </div>
 
-<script src="data.js?v=20260928b"></script>
-<script src="temporada.js?v=20260928b"></script>
+<script src="data.js?v=20260929a"></script>
+<script src="temporada.js?v=20260929a"></script>
 <script>
 (function(){
 const Q = window.QUINIELA;
+const T = window.TEMPORADA || {semanas:[]};
 const low = s => String(s).toLowerCase();
 const esc = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const parts = Q.participantes.map(([n,p])=>({name:n,picks:p.split(",").map(x=>x.trim())}));
-let selected = Q.yo;
-try{ const s=localStorage.getItem("q-sel"); if(s && parts.some(p=>p.name===s)) selected=s; }catch(e){}
-let games = Q.juegos.map((g,i)=>({...g,i,state:"pre",fs:null,ds:null,detail:"",date:new Date(g.hora)}));
-let source="none", lastOk=null, firstRender=true, lastList=[], lastRanking=[];
+const $ = id => document.getElementById(id);
 
-document.getElementById("kicker").textContent = `Quiniela NFL ${Q.temporada}`;
-document.getElementById("title").textContent = `Semana ${Q.semana}`;
-document.title = `Quiniela NFL · Semana ${Q.semana}`;
-const sel = document.getElementById("sel");
-sel.innerHTML = parts.map(p=>`<option${p.name===selected?" selected":""}>${esc(p.name)}</option>`).join("");
-sel.addEventListener("change",()=>{selected=sel.value;try{localStorage.setItem("q-sel",selected)}catch(e){};render();});
+// ---------- Semanas ----------
+const W = {};                      // n -> {n, games, parts, respaldo, source, lastOk, hasGames}
+Object.entries(Q.semanas||{}).forEach(([k,v])=>{
+  const n=+k;
+  W[n] = {n, respaldo:v.respaldo||null, source:"none", lastOk:null, hasGames:(v.juegos||[]).length>0,
+    parts:(v.participantes||[]).map(([nm,p])=>({name:nm,picks:p.split(",").map(x=>x.trim())})),
+    games:(v.juegos||[]).map((g,i)=>({...g,i,state:"pre",fs:null,ds:null,detail:"",date:new Date(g.hora)}))};
+});
+T.semanas.forEach(w=>{ if(!W[w.n]) W[w.n]={n:w.n,games:[],parts:[],hasGames:false,source:"none"}; });
+const closedPts = n => (T.semanas.find(w=>w.n===n)||{}).puntos || null;
+const weekNums = Object.keys(W).map(Number).sort((a,b)=>a-b);
 
-const fmtKick = d => d.toLocaleString("es-GT",{weekday:"short",day:"numeric",hour:"numeric",minute:"2-digit"});
-function applyBackup(){
-  Q.respaldo.juegos.forEach((r,i)=>{ if(!r) return; const g=games[i]; g.fs=r[0]; g.ds=r[1]; g.state=r[2]; g.detail=r[2]==="post"?"Final":"En juego"; });
+// Regla: la semana cambia al terminar el día (hora de Guatemala, UTC−6) de su último juego.
+function cutoff(w){
+  if(!w.hasGames) return 0;
+  const last = Math.max(...w.games.map(g=>g.date.getTime()));
+  const gt = new Date(last - 6*3600e3);
+  return Date.UTC(gt.getUTCFullYear(), gt.getUTCMonth(), gt.getUTCDate()+1, 6);
 }
-async function load(){
-  const q = `dates=${Q.temporada}&seasontype=2&week=${Q.semana}`;
+function currentWeek(){
+  const withGames = weekNums.filter(n=>W[n].hasGames);
+  const now = Date.now();
+  return withGames.find(n=>cutoff(W[n])>now) ?? withGames[withGames.length-1] ?? weekNums[weekNums.length-1];
+}
+let CUR = currentWeek();
+
+// ---------- Estado de vista ----------
+function parseHash(){
+  const h = location.hash;
+  if(h==="#temporada") return {view:"temporada", week:null};
+  const m = h.match(/^#semana-(\d+)$/);
+  if(m && W[+m[1]]) return {view:"semana", week:+m[1]};
+  return {view:"semana", week:null};
+}
+let {view, week:wkSel} = parseHash();
+let week = wkSel ?? CUR;
+const setHash = h => { try{ history.replaceState(null,"",h); }catch(e){ location.hash=h; } };
+
+const allNames = [...new Set([...weekNums.flatMap(n=>W[n].parts.map(p=>p.name)), ...T.semanas.flatMap(w=>Object.keys(w.puntos||{}))])];
+let selected = allNames.includes(Q.yo) ? Q.yo : allNames[0];
+try{ const s=localStorage.getItem("q-sel"); if(s && allNames.includes(s)) selected=s; }catch(e){}
+const sel = $("sel");
+sel.innerHTML = allNames.map(n=>`<option${n===selected?" selected":""}>${esc(n)}</option>`).join("");
+function pickName(n){ selected=n; sel.value=n; try{localStorage.setItem("q-sel",n)}catch(e){}; render(); }
+sel.addEventListener("change",()=>pickName(sel.value));
+
+const wsel = $("wsel");
+function fillWeeks(){
+  wsel.innerHTML = weekNums.map(n=>`<option value="${n}"${n===week?" selected":""}>Semana ${n}${n===CUR?" · actual":""}</option>`).join("");
+}
+fillWeeks();
+wsel.addEventListener("change",()=>{ week=+wsel.value; setView("semana"); setHash(week===CUR?"#semana":`#semana-${week}`); firstRender=true; tick(); window.scrollTo({top:0}); });
+const toWeekView = ()=>{ if(view!=="semana"){ setView("semana"); setHash(week===CUR?"#semana":`#semana-${week}`); render(); } };
+$("t-sem").addEventListener("pointerdown", toWeekView);
+wsel.addEventListener("focus", toWeekView);
+$("t-tem").addEventListener("click", e=>{ e.preventDefault(); setView("temporada"); setHash("#temporada"); render(); window.scrollTo({top:0}); });
+window.addEventListener("hashchange",()=>{ const p=parseHash(); week=p.week??(p.view==="semana"?CUR:week); wsel.value=week; setView(p.view); firstRender=true; tick(); });
+$("jump").onclick = ()=>$("tabla").scrollIntoView({behavior:"smooth",block:"start"});
+
+function setView(v){
+  view=v; document.body.classList.toggle("v-temporada",v==="temporada");
+  $("t-sem").classList.toggle("on",v==="semana");
+  $("t-tem").classList.toggle("on",v==="temporada");
+}
+setView(view);
+
+// ---------- Marcadores ----------
+const fmtKick = d => d.toLocaleString("es-GT",{weekday:"short",day:"numeric",hour:"numeric",minute:"2-digit"});
+function applyBackup(w){
+  (w.respaldo?.juegos||[]).forEach((r,i)=>{ if(!r) return; const g=w.games[i]; g.fs=r[0]; g.ds=r[1]; g.state=r[2]; g.detail=r[2]==="post"?"Final":"En juego"; });
+}
+async function load(w){
+  if(!w.hasGames) return;
+  const q = `dates=${Q.temporada}&seasontype=2&week=${w.n}`;
   for(const host of ["https://site.api.espn.com","https://site.web.api.espn.com"]){
     try{
       const r = await fetch(`${host}/apis/site/v2/sports/football/nfl/scoreboard?${q}`,{cache:"no-store"});
       if(!r.ok) continue;
       const evs = (await r.json()).events||[];
       let matched=0;
-      games.forEach(g=>{
+      w.games.forEach(g=>{
         const ev = evs.find(e=>{ const n=(e.competitions?.[0]?.competitors||[]).map(c=>low(c.team?.name||"")); return n.includes(low(g.fav))&&n.includes(low(g.dog)); });
         if(!ev) return; matched++;
         const comp=ev.competitions[0], st=(comp.status||ev.status).type;
@@ -288,21 +402,31 @@ async function load(){
         if(st.state==="pre"){ g.fs=g.ds=null; g.detail=""; }
         else { g.fs=+by(g.fav).score; g.ds=+by(g.dog).score; g.detail = st.state==="post"?"Final":(st.shortDetail||"En juego"); }
       });
-      if(matched){ source="espn"; lastOk=new Date(); return; }
+      if(matched){ w.source="espn"; w.lastOk=new Date(); return; }
     }catch(e){}
   }
-  if(source!=="espn"){ applyBackup(); source="backup"; }
+  if(w.source!=="espn"){ applyBackup(w); w.source="backup"; }
 }
 const cover = g => (g.state==="pre"||g.fs==null) ? null : ((g.fs-g.ds>g.ln)?low(g.fav):low(g.dog));
-function scoreFor(p){
+function scoreFor(w,p){
   let fin=0,prov=0,lost=0,lostProv=0;
-  games.forEach(g=>{ const c=cover(g); if(!c) return; const hit=low(p.picks[g.i])===c;
+  w.games.forEach(g=>{ const c=cover(g); if(!c) return; const hit=low(p.picks[g.i])===c;
     if(g.state==="post"){hit?fin++:lost++;} else {hit?prov++:lostProv++;} });
   return {fin,prov,tot:fin+prov,lost:lost+lostProv};
 }
-const ordered = () => [...games].sort((a,b)=>a.date-b.date || a.i-b.i);
+function rankingFor(w){
+  let r;
+  if(w.parts.length) r = w.parts.map(p=>({...p,...scoreFor(w,p)}));
+  else { const pts=closedPts(w.n); r = pts ? Object.entries(pts).map(([name,v])=>({name,picks:[],fin:v,prov:0,tot:v,lost:null})) : []; }
+  r.sort((a,b)=>b.tot-a.tot||b.fin-a.fin||a.name.localeCompare(b.name));
+  let rank=0,prev=null; r.forEach((x,i)=>{ if(x.tot!==prev){rank=i+1;prev=x.tot;} x.rank=rank; });
+  return r;
+}
+const done = w => w.hasGames && w.games.every(g=>g.state==="post");
 
-const cardsEl = document.getElementById("cards");
+// ---------- Carrusel ----------
+const cardsEl = $("cards");
+let firstRender=true;
 const cardAt = k => cardsEl.children[k];
 function currentIndex(){
   const mid = cardsEl.scrollLeft + cardsEl.clientWidth/2; let best=0, bd=1e9;
@@ -315,43 +439,34 @@ function goTo(k,smooth){
 }
 function updateNav(){
   const k=currentIndex(), n=cardsEl.children.length;
-  document.getElementById("idx").textContent = n?`${k+1} de ${n}`:"";
-  document.getElementById("prev").disabled = k<=0;
-  document.getElementById("next").disabled = k>=n-1;
-  [...document.getElementById("strip").children].forEach((b,j)=>b.classList.toggle("cur",j===k));
+  $("idx").textContent = n?`${k+1} de ${n}`:"";
+  $("prev").disabled = k<=0;
+  $("next").disabled = k>=n-1;
+  [...$("strip").children].forEach((b,j)=>b.classList.toggle("cur",j===k));
   document.querySelectorAll("#full thead th").forEach((th,j)=>th.classList.toggle("curcol",j-1===k));
 }
 let navT; cardsEl.addEventListener("scroll",()=>{clearTimeout(navT);navT=setTimeout(updateNav,60);},{passive:true});
-document.getElementById("prev").onclick=()=>goTo(currentIndex()-1,true);
-document.getElementById("next").onclick=()=>goTo(currentIndex()+1,true);
+$("prev").onclick=()=>goTo(currentIndex()-1,true);
+$("next").onclick=()=>goTo(currentIndex()+1,true);
+document.addEventListener("keydown",e=>{
+  if(view!=="semana" || /^(SELECT|INPUT|TEXTAREA)$/.test(document.activeElement?.tagName)) return;
+  if(e.key==="ArrowLeft"){ goTo(currentIndex()-1,true); e.preventDefault(); }
+  if(e.key==="ArrowRight"){ goTo(currentIndex()+1,true); e.preventDefault(); }
+});
 
-
-const T = window.TEMPORADA || {semanas:[]};
-let view = location.hash==="#temporada" ? "temporada" : "semana";
-function setView(v){
-  view=v; document.body.classList.toggle("v-temporada",v==="temporada");
-  document.getElementById("t-sem").classList.toggle("on",v==="semana");
-  document.getElementById("t-tem").classList.toggle("on",v==="temporada");
-  document.getElementById("t-sem").textContent = `Semana ${Q.semana}`;
-}
-window.addEventListener("hashchange",()=>{ if(location.hash==="#semana"||location.hash==="#temporada"){ setView(location.hash.slice(1)); render(); window.scrollTo(0,0);} });
-setView(view);
-
-function seasonTable(weekRanking){
-  const weekDone = games.every(g=>g.state==="post");
-  // semanas: cerradas desde temporada.js + la activa en vivo desde data.js
+// ---------- Temporada ----------
+function seasonTable(){
+  const cw = W[CUR];
+  const maxW = Math.max(CUR, ...T.semanas.map(w=>w.n));
   const weeks = [];
-  const maxW = Math.max(Q.semana, ...T.semanas.map(w=>w.n));
   for(let n=1;n<=maxW;n++){
-    if(n===Q.semana){
-      const pts={}; weekRanking.forEach(r=>pts[r.name]=r.tot);
-      weeks.push({n,pts,live:!weekDone,loaded:true});
-    } else {
-      const w=T.semanas.find(x=>x.n===n);
-      weeks.push({n,pts:(w&&w.puntos)||{},live:false,loaded:!!(w&&w.puntos)});
-    }
+    const pts = closedPts(n);
+    if(pts){ weeks.push({n,pts,live:false,loaded:true}); continue; }
+    const w = W[n];
+    if(w && w.parts.length && n===CUR){ const p={}; rankingFor(w).forEach(r=>p[r.name]=r.tot); weeks.push({n,pts:p,live:!done(w),loaded:true}); }
+    else weeks.push({n,pts:{},live:false,loaded:false,pending:n>=CUR});
   }
-  const names = [...new Set([...parts.map(p=>p.name), ...weeks.flatMap(w=>Object.keys(w.pts))])];
+  const names = [...new Set([...allNames, ...weeks.flatMap(w=>Object.keys(w.pts))])];
   const cum = (name,upto) => weeks.filter(w=>w.n<=upto).reduce((a,w)=>a+(w.pts[name]||0),0);
   const rankAt = upto => { const arr=names.map(n=>({n,t:cum(n,upto)})).sort((a,b)=>b.t-a.t); const m={}; let rk=0,pv=null; arr.forEach((x,i)=>{ if(x.t!==pv){rk=i+1;pv=x.t;} m[x.n]=rk; }); return m; };
   const loadedNs = weeks.filter(w=>w.loaded).map(w=>w.n);
@@ -362,94 +477,105 @@ function seasonTable(weekRanking){
     weeks:weeks.map((w,j)=>({v:w.loaded?(w.pts[n]??null):null,live:w.live,best:w.loaded&&!w.live&&w.pts[n]===best[j]&&best[j]>=0})),
     won:weeks.filter((w,j)=>w.loaded&&!w.live&&w.pts[n]===best[j]).length}))
     .sort((a,b)=>b.tot-a.tot||a.name.localeCompare(b.name));
-  return {rows,weeks,missing:weeks.filter(w=>!w.loaded).map(w=>w.n)};
+  return {rows,weeks,missing:weeks.filter(w=>!w.loaded&&!w.pending).map(w=>w.n),lastN};
 }
-
-function renderSeason(weekRanking){
-  const {rows,weeks,missing} = seasonTable(weekRanking);
+function renderSeason(){
+  const {rows,weeks,missing,lastN} = seasonTable();
   const lead = rows[0].tot;
-  const warn=document.getElementById("swarn");
+  const warn=$("swarn");
   warn.hidden = !missing.length;
   warn.textContent = missing.length ? `Faltan los aciertos de la${missing.length>1?"s":""} semana${missing.length>1?"s":""} ${missing.join(" y ")}; el acumulado todavía no las incluye.` : "";
-  const head = `<thead><tr><th class="sn">Participante</th><th>Total</th><th>Dif.</th>${weeks.map(w=>`<th>S${w.n}${w.live?"<br>en curso":""}</th>`).join("")}<th>Sem.<br>ganadas</th></tr></thead>`;
+  const head = `<thead><tr><th class="sn">Participante</th><th>Total</th><th>Dif.</th>${weeks.map(w=>`<th>S${w.n}${w.live?"<br>en curso":w.pending?"<br>sin picks":""}</th>`).join("")}<th>Sem.<br>ganadas</th></tr></thead>`;
   const body = `<tbody>${rows.map(r=>`<tr class="${r.name===selected?"me":""}">
     <td class="sn"><button type="button" data-n="${esc(r.name)}"><span class="r">${r.rank}</span><span class="n">${esc(r.name)}</span><span class="mv ${r.mv>0?"up":r.mv<0?"dn":""}">${r.mv>0?"▲"+r.mv:r.mv<0?"▼"+(-r.mv):""}</span></button></td>
     <td class="tot">${r.tot}</td><td class="gap">${r.tot===lead?"—":"−"+(lead-r.tot)}</td>
     ${r.weeks.map(c=>`<td class="wk${c.v==null?" na":""}${c.live?" live":""}${c.best?" best":""}">${c.v==null?"·":c.v}</td>`).join("")}
     <td class="wk">${r.won||""}</td></tr>`).join("")}</tbody>`;
-  const t=document.getElementById("season"); t.innerHTML=head+body;
-  t.querySelectorAll(".sn button").forEach(b=>b.onclick=()=>{ selected=b.dataset.n; sel.value=selected; try{localStorage.setItem("q-sel",selected)}catch(e){}; render(); });
+  const t=$("season"); t.innerHTML=head+body;
+  t.querySelectorAll(".sn button").forEach(b=>b.onclick=()=>pickName(b.dataset.n));
   requestAnimationFrame(()=>showMe("seasonwrap"));
-
-  const me = rows.find(r=>r.name===selected);
+  const me = rows.find(r=>r.name===selected) || rows[0];
   const tied = rows.filter(r=>r.tot===me.tot).length;
   const played = me.weeks.filter(c=>c.v!=null&&!c.live);
   const bestW = played.length ? Math.max(...played.map(c=>c.v)) : null;
   const avg = played.length ? (played.reduce((a,c)=>a+c.v,0)/played.length).toFixed(1) : "–";
-  document.getElementById("sumh").textContent = me.name;
-  document.getElementById("sum").innerHTML = [
+  $("sumh").textContent = me.name;
+  $("sum").innerHTML = [
     ["Lugar",`${me.rank}º${tied>1?" (empate)":""}`],["Total",me.tot],["Detrás del líder",me.tot===lead?"Líder":lead-me.tot],
     ["Promedio por semana",avg],["Mejor semana",bestW??"–"],["Semanas ganadas",me.won]
   ].map(([k,v])=>`<div><div class="k">${k}</div><div class="v">${v}</div></div>`).join("");
-  return me;
+  return {me,tied,lastN};
 }
 
+// ---------- Vista semana ----------
 function render(){
+  const w = W[week];
   const keep = firstRender ? null : currentIndex();
-  const ranking = parts.map(p=>({...p,...scoreFor(p)})).sort((a,b)=>b.tot-a.tot||b.fin-a.fin||a.name.localeCompare(b.name));
-  let rank=0,prev=null; ranking.forEach((r,i)=>{ if(r.tot!==prev){rank=i+1;prev=r.tot;} r.rank=rank; });
-  const me = ranking.find(r=>r.name===selected), tied = ranking.filter(r=>r.tot===me.tot).length;
-  const player = parts.find(p=>p.name===selected);
+  const ranking = rankingFor(w);
+  const me = ranking.find(r=>r.name===selected);
+  const player = w.parts.find(p=>p.name===selected);
+  const hasPicks = w.parts.length>0;
 
-  document.getElementById("who").textContent = me.name;
-  document.getElementById("rec").textContent = `${me.tot}–${me.lost}`;
-  document.getElementById("reccap").textContent = me.prov ? `${me.fin} cerrados + ${me.prov} en juego` : `${me.fin} aciertos`;
-  document.getElementById("pos").textContent = `${me.rank}º lugar` + (tied>1?` · empate con ${tied-1}`:"");
-  const played = games.filter(g=>g.state!=="pre").length, live = games.some(g=>g.state==="in");
-  document.getElementById("dot").className = "dot"+(live&&source==="espn"?" live":"");
-  document.getElementById("status").textContent = source==="espn"
-    ? `${live?"En vivo":"Actualizado"} ${lastOk.toLocaleTimeString("es-GT",{hour:"numeric",minute:"2-digit"})} · ${played} de ${games.length} juegos`
-    : `Sin conexión a ESPN · marcadores al ${Q.respaldo.corte}`;
+  $("kicker").textContent = `Quiniela NFL ${Q.temporada}`;
+  document.title = view==="temporada" ? `Quiniela NFL · Temporada ${Q.temporada}` : `Quiniela NFL · Semana ${week}`;
+  $("who").textContent = selected;
 
-  const sme = renderSeason(ranking);
   if(view==="temporada"){
-    document.getElementById("title").textContent = `Temporada ${Q.temporada}`;
-    document.getElementById("rec").textContent = sme.tot;
-    document.getElementById("reccap").textContent = `aciertos acumulados · semana ${Q.semana}${games.every(g=>g.state==="post")?" cerrada":" en curso"}`;
-    const st = sme.tot, tiedS = document.querySelectorAll("#season tbody tr").length && [...document.querySelectorAll("#season .tot")].filter(td=>+td.textContent===st).length;
-    document.getElementById("pos").textContent = `${sme.rank}º general` + (tiedS>1?` · empate con ${tiedS-1}`:"");
-  } else {
-    document.getElementById("title").textContent = `Semana ${Q.semana}`;
+    const {me:sme,tied} = renderSeason();
+    const cw=W[CUR];
+    $("title").textContent = `Temporada ${Q.temporada}`;
+    $("rec").textContent = sme.tot;
+    $("reccap").textContent = `aciertos acumulados · semana ${CUR} ${cw.parts.length?(done(cw)?"cerrada":"en curso"):"sin picks todavía"}`;
+    $("pos").textContent = `${sme.rank}º general` + (tied>1?` · empate con ${tied-1}`:"");
+    if(cw.parts.length) statusLine(cw); else { $("dot").className="dot"; $("status").textContent=`Semana ${CUR}: picks pendientes`; }
+    return;
   }
+  renderSeason();
+  $("title").textContent = `Semana ${week}`;
+  if(me){
+    const tied = ranking.filter(r=>r.tot===me.tot).length;
+    $("rec").textContent = me.lost==null ? me.tot : `${me.tot}–${me.lost}`;
+    $("reccap").textContent = me.lost==null ? "aciertos" : me.prov ? `${me.fin} cerrados + ${me.prov} en juego` : `${me.fin} aciertos`;
+    $("pos").textContent = `${me.rank}º lugar` + (tied>1?` · empate con ${tied-1}`:"");
+  } else {
+    $("rec").textContent = "–";
+    $("reccap").textContent = hasPicks ? "no participó esta semana" : "picks pendientes";
+    $("pos").textContent = week===CUR ? "Semana actual" : `Semana ${week}`;
+  }
+  statusLine(w);
 
-  const list = ordered();
-  const cls = list.map(g=>{ const c=cover(g); if(!c) return "p"; const hit=low(player.picks[g.i])===c; return (g.state==="post"?"":"p")+(hit?"w":"l"); });
+  const list = [...w.games].sort((a,b)=>a.date-b.date || a.i-b.i);
+  const cls = list.map(g=>{ const c=cover(g); if(!c||!player) return "p"; const hit=low(player.picks[g.i])===c; return (g.state==="post"?"":"p")+(hit?"w":"l"); });
 
-  cardsEl.innerHTML = list.map((g,k)=>{
-    const c=cover(g), mine=player.picks[g.i];
-    const same = parts.filter(p=>low(p.picks[g.i])===low(mine)).length - 1;
-    const chip = g.state==="pre" ? `<span class="chip">${esc(fmtKick(g.date))}</span>`
-      : `<span class="chip ${g.state}">${esc(g.detail)}</span>`;
+  cardsEl.innerHTML = !w.hasGames ? `<div class="empty">Esta semana no tiene cargado el detalle de juegos; solo los aciertos finales.</div>` : list.map((g,k)=>{
+    const c=cover(g), mine=player?player.picks[g.i]:null;
+    const favPicks = w.parts.filter(p=>low(p.picks[g.i])===low(g.fav)).length;
+    const same = mine ? w.parts.filter(p=>low(p.picks[g.i])===low(mine)).length - 1 : 0;
+    const chip = g.state==="pre" ? `<span class="chip">${esc(fmtKick(g.date))}</span>` : `<span class="chip ${g.state}">${esc(g.detail)}</span>`;
     const row = (name,sub,score,isCov) => `<div class="team${isCov?" cov":""}"><div><span class="tname">${esc(name)}</span><span class="tsub">${sub}</span></div><div class="tscore">${score==null?"":score}</div></div>`;
     const r = cls[k];
-    const res = r==="p" ? `·<small>Por jugarse</small>` : r==="w" ? `1<small>Acierto</small>` : r==="l" ? `0<small>Fallo</small>` : r==="pw" ? `1<small>Va cubriendo</small>` : `0<small>No va cubriendo</small>`;
+    const res = !mine ? "" : r==="p" ? `·<small>Por jugarse</small>` : r==="w" ? `1<small>Acierto</small>` : r==="l" ? `0<small>Fallo</small>` : r==="pw" ? `1<small>Va cubriendo</small>` : `0<small>No va cubriendo</small>`;
     let margin="";
     if(c){ const m=g.fs-g.ds; margin = `${esc(g.fav)} ${m>0?"gana por "+m:m<0?"pierde por "+(-m):"empatado"}; necesita más de ${g.ln}.`; }
-    return `<article class="card ${r}" aria-label="Juego ${k+1}">
+    const pickBox = mine
+      ? `<div><div class="lbl">Pronóstico</div><div class="pk">${esc(mine)}</div><div class="crowd">${same===0?"Nadie más lo eligió":same===1?"1 más lo eligió":same+" más lo eligieron"}</div></div><div class="res">${res}</div>`
+      : hasPicks ? `<div><div class="lbl">Pronóstico</div><div class="pk">—</div><div class="crowd">${favPicks} con ${esc(g.fav)} · ${w.parts.length-favPicks} con ${esc(g.dog)}</div></div>`
+      : `<div><div class="lbl">Pronóstico</div><div class="crowd">Los picks se cargan cuando cierre la quiniela</div></div>`;
+    return `<article class="card ${mine?r:"nopick"}" aria-label="Juego ${k+1}">
       <div class="top"><span>${esc(fmtKick(g.date).split(",")[0])}</span>${chip}</div>
       <div class="teams">
         ${row(g.fav,`<span class="ln">−${g.ln}</span>favorito`,g.fs,c===low(g.fav))}
         ${row(g.dog,`<span class="ln">+${g.ln}</span>recibe puntos`,g.ds,c===low(g.dog))}
       </div>
       <div class="margin">${margin}</div>
-      <div class="mypick"><div><div class="lbl">Pronóstico</div><div class="pk">${esc(mine)}</div><div class="crowd">${same===0?"Nadie más lo eligió":same===1?"1 más lo eligió":same+" más lo eligieron"}</div></div>
-        <div class="res">${res}</div></div>
+      <div class="mypick">${pickBox}</div>
     </article>`;
   }).join("");
 
-  const strip=document.getElementById("strip");
+  const strip=$("strip");
   strip.innerHTML = list.map((g,k)=>`<button type="button" class="${cls[k]}" aria-label="${esc(g.fav)} vs ${esc(g.dog)}"></button>`).join("");
   [...strip.children].forEach((b,k)=>b.onclick=()=>goTo(k,true));
+  document.querySelector(".carhead").hidden = !w.hasGames;
 
   let target = keep;
   if(target==null){
@@ -459,18 +585,30 @@ function render(){
   }
   requestAnimationFrame(()=>{ goTo(target,false); updateNav(); });
   firstRender=false;
-  lastList=list; lastRanking=ranking;
-  requestAnimationFrame(()=>{ renderFull(list,ranking); showMe("gridwrap"); showMe("standwrap"); });
+  requestAnimationFrame(()=>{ renderFull(w,list,ranking); showMe("gridwrap"); showMe("standwrap"); });
 
-  document.getElementById("stand").innerHTML = ranking.map(r=>`
+  const maxPts = w.hasGames ? w.games.length : 16;
+  $("stand").innerHTML = ranking.length ? ranking.map(r=>`
     <tr class="${r.name===selected?"me":""}"><td class="rk">${r.rank}</td>
-      <td class="nm">${esc(r.name)}<div class="bar"><i style="width:${r.tot/games.length*100}%"></i><b style="width:${r.fin/games.length*100}%"></b></div></td>
-      <td class="ptsn">${r.tot}</td></tr>`).join("");
+      <td class="nm">${esc(r.name)}<div class="bar"><i style="width:${r.tot/maxPts*100}%"></i><b style="width:${r.fin/maxPts*100}%"></b></div></td>
+      <td class="ptsn">${r.tot}</td></tr>`).join("")
+    : `<tr><td class="empty" colspan="3">Todavía no están los picks de esta semana.</td></tr>`;
+}
+function statusLine(w){
+  const played = w.games.filter(g=>g.state!=="pre").length, live = w.games.some(g=>g.state==="in");
+  $("dot").className = "dot"+(live&&w.source==="espn"?" live":"");
+  $("status").textContent = !w.hasGames ? "Aciertos finales"
+    : w.source==="espn" ? `${live?"En vivo":"Actualizado"} ${w.lastOk.toLocaleTimeString("es-GT",{hour:"numeric",minute:"2-digit"})} · ${played} de ${w.games.length} juegos`
+    : w.respaldo ? `Sin conexión a ESPN · marcadores ${w.respaldo.corte==="final"?"finales":"al "+w.respaldo.corte}` : "Sin conexión a ESPN";
 }
 
 const AB={packers:"GB",falcons:"ATL",bengals:"CIN",steelers:"PIT",lions:"DET",jets:"NYJ",panthers:"CAR",browns:"CLE",texans:"HOU",colts:"IND",chiefs:"KC",dolphins:"MIA",jaguars:"JAX",patriots:"NE",giants:"NYG",titans:"TEN",bills:"BUF",chargers:"LAC",seahawks:"SEA",commanders:"WAS",vikings:"MIN",buccaneers:"TB","49ers":"SF",cardinals:"ARI",ravens:"BAL",cowboys:"DAL",saints:"NO",raiders:"LV",rams:"LAR",broncos:"DEN",eagles:"PHI",bears:"CHI"};
 const ab = n => AB[low(n)] || String(n).slice(0,3).toUpperCase();
-function renderFull(list, ranking){
+function renderFull(w, list, ranking){
+  const t=$("full");
+  $("tabla").hidden = !w.parts.length; $("jump").hidden = !w.parts.length;
+  document.querySelector(".weekgrid").classList.toggle("solo", !w.parts.length);
+  if(!w.parts.length){ t.innerHTML=""; return; }
   const cur = currentIndex();
   const head = `<thead><tr><th class="who-h">Participante · pts</th>${list.map((g,k)=>{
     const c=cover(g);
@@ -479,23 +617,31 @@ function renderFull(list, ranking){
     const c=cover(g), pk=r.picks[g.i]; let k="";
     if(c){ const hit=low(pk)===c; k=(g.state==="post"?"":"p")+(hit?"w":"l"); }
     return `<td><span class="cell ${k}">${ab(pk)}</span></td>`;}).join("")}</tr>`).join("")}</tbody>`;
-  const t=document.getElementById("full"); t.innerHTML=head+body;
+  t.innerHTML=head+body;
   t.querySelectorAll(".colh").forEach(b=>b.onclick=()=>{ document.querySelector(".carhead").scrollIntoView({behavior:"smooth",block:"start"}); goTo(+b.dataset.k,true); });
-  t.querySelectorAll(".who-c button").forEach(b=>b.onclick=()=>{ selected=b.dataset.n; sel.value=selected; try{localStorage.setItem("q-sel",selected)}catch(e){}; render(); document.querySelector(".board").scrollIntoView({behavior:"smooth"}); });
+  t.querySelectorAll(".who-c button").forEach(b=>b.onclick=()=>{ pickName(b.dataset.n); document.querySelector(".board").scrollIntoView({behavior:"smooth"}); });
 }
-
 function showMe(wrapId){
-  const w=document.getElementById(wrapId), r=w && w.querySelector("tr.me");
+  const w=$(wrapId), r=w && w.querySelector("tr.me");
   if(!r) return;
   const head = w.querySelector("thead"); const off = head ? head.offsetHeight : 0;
   if(r.offsetTop < w.scrollTop + off || r.offsetTop + r.offsetHeight > w.scrollTop + w.clientHeight)
     w.scrollTop = Math.max(0, r.offsetTop - off - (w.clientHeight-off)/2 + r.offsetHeight/2);
 }
-async function tick(){ await load(); render(); }
+let rT; window.addEventListener("resize",()=>{ clearTimeout(rT); rT=setTimeout(()=>{ if(view==="semana") goTo(currentIndex(),false); },150); });
+
+async function tick(){
+  const nc = currentWeek();
+  if(nc!==CUR){ const follow = week===CUR && !parseHash().week; CUR=nc; if(follow) week=CUR; fillWeeks(); }
+  const need = [...new Set([week, CUR])].map(n=>W[n]).filter(w=>w && w.hasGames && !(w.source!=="none" && done(w)));
+  await Promise.all(need.map(load));
+  render();
+}
 tick();
-setInterval(()=>{ if(!document.hidden && games.some(g=>g.state!=="post")) tick(); },60000);
+setInterval(()=>{ if(!document.hidden && [W[week],W[CUR]].some(w=>w&&w.hasGames&&!done(w))) tick(); },60000);
 document.addEventListener("visibilitychange",()=>{ if(!document.hidden) tick(); });
 })();
+
 </script>
 </body>
 </html>
