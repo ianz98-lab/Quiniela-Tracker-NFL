@@ -68,7 +68,28 @@ window.QUINIELA = {
       {fav:"Lions", ln:2.5, dog:"PANTHERS", hora:"2026-10-05T00:20:00Z"},
       {fav:"SAINTS", ln:2.5, dog:"Falcons", hora:"2026-10-06T00:15:00Z"}
     ],
-    participantes: [],
+    participantes: [
+      ["Andrés De León", "Steelers,COMMANDERS,Cardinals,Cowboys,Packers,BENGALS,Rams,Patriots,Jets,Titans,VIKINGS,Broncos,RAIDERS,SEAHAWKS,Lions,SAINTS"],
+      ["Arturo Zimeri / Xavier Zimeri", "BROWNS,COMMANDERS,Cardinals,TEXANS,BUCCANEERS,Jaguars,Rams,Patriots,BEARS,RAVENS,VIKINGS,Broncos,RAIDERS,Chargers,PANTHERS,SAINTS"],
+      ["Carlos Noguera / Ignacio Noguera", "Steelers,COMMANDERS,Cardinals,TEXANS,Packers,BENGALS,Rams,Patriots,Jets,Titans,VIKINGS,Broncos,RAIDERS,SEAHAWKS,Lions,Falcons"],
+      ["Edgar Bran / Andrés Bran", "Steelers,Colts,Cardinals,TEXANS,Packers,BENGALS,Rams,Patriots,BEARS,RAVENS,VIKINGS,49ERS,RAIDERS,SEAHAWKS,Lions,SAINTS"],
+      ["Edgar Sarceño / Mario Zirion", "BROWNS,Colts,GIANTS,Cowboys,Packers,BENGALS,EAGLES,Patriots,BEARS,RAVENS,VIKINGS,49ERS,RAIDERS,SEAHAWKS,PANTHERS,SAINTS"],
+      ["Federico Zimeri", "BROWNS,COMMANDERS,Cardinals,Cowboys,Packers,BENGALS,Rams,Patriots,Jets,Titans,Dolphins,49ERS,RAIDERS,Chargers,Lions,Falcons"],
+      ["Gerardo Villa e hijos", "Steelers,Colts,GIANTS,TEXANS,BUCCANEERS,BENGALS,Rams,BILLS,BEARS,RAVENS,VIKINGS,49ERS,RAIDERS,SEAHAWKS,Lions,SAINTS"],
+      ["German García / Carlos Abreu", "Steelers,COMMANDERS,Cardinals,TEXANS,BUCCANEERS,BENGALS,Rams,BILLS,BEARS,Titans,VIKINGS,49ERS,Chiefs,SEAHAWKS,Lions,SAINTS"],
+      ["Gustavo Anzueto / Guille Anzueto", "Steelers,COMMANDERS,Cardinals,Cowboys,Packers,Jaguars,Rams,BILLS,BEARS,RAVENS,VIKINGS,49ERS,Chiefs,SEAHAWKS,Lions,SAINTS"],
+      ["J.C. Sandoval / J.C. Sandoval Jr.", "Steelers,Colts,GIANTS,TEXANS,Packers,Jaguars,EAGLES,BILLS,Jets,Titans,VIKINGS,Broncos,RAIDERS,Chargers,Lions,Falcons"],
+      ["Javier Arzú Pérez", "BROWNS,COMMANDERS,GIANTS,TEXANS,Packers,BENGALS,EAGLES,BILLS,BEARS,RAVENS,VIKINGS,Broncos,RAIDERS,Chargers,Lions,SAINTS"],
+      ["Joe Pasarelli / Everst Figueroa", "Steelers,Colts,Cardinals,TEXANS,BUCCANEERS,BENGALS,EAGLES,BILLS,BEARS,RAVENS,VIKINGS,49ERS,Chiefs,SEAHAWKS,Lions,SAINTS"],
+      ["José Gabriel Cummings", "Steelers,Colts,Cardinals,TEXANS,Packers,BENGALS,EAGLES,Patriots,Jets,Titans,Dolphins,49ERS,RAIDERS,Chargers,PANTHERS,SAINTS"],
+      ["José Luis Contreras / Diego Contreras", "BROWNS,Colts,GIANTS,TEXANS,BUCCANEERS,Jaguars,EAGLES,BILLS,BEARS,Titans,VIKINGS,49ERS,RAIDERS,SEAHAWKS,PANTHERS,Falcons"],
+      ["José Porres", "Steelers,COMMANDERS,Cardinals,Cowboys,Packers,Jaguars,Rams,BILLS,BEARS,RAVENS,Dolphins,Broncos,RAIDERS,SEAHAWKS,Lions,SAINTS"],
+      ["Luis Grazioso / Luigi Grazioso", "Steelers,Colts,Cardinals,TEXANS,BUCCANEERS,Jaguars,EAGLES,BILLS,BEARS,RAVENS,VIKINGS,49ERS,RAIDERS,SEAHAWKS,Lions,SAINTS"],
+      ["Luis Herrera / Orlando Diab", "Steelers,COMMANDERS,Cardinals,TEXANS,Packers,BENGALS,Rams,BILLS,Jets,Titans,Dolphins,Broncos,RAIDERS,SEAHAWKS,Lions,Falcons"],
+      ["Mario Zedan", "Steelers,COMMANDERS,GIANTS,TEXANS,Packers,Jaguars,EAGLES,Patriots,BEARS,Titans,Dolphins,Broncos,Chiefs,Chargers,Lions,Falcons"],
+      ["Stuardo Zimeri / Ian Zimeri", "BROWNS,COMMANDERS,Cardinals,TEXANS,Packers,BENGALS,EAGLES,Patriots,Jets,Titans,Dolphins,49ERS,RAIDERS,Chargers,Lions,SAINTS"],
+      ["Willy Zaid / Guille Zaid", "BROWNS,COMMANDERS,Cardinals,TEXANS,Packers,BENGALS,Rams,BILLS,BEARS,Titans,VIKINGS,49ERS,RAIDERS,SEAHAWKS,Lions,Falcons"]
+    ],
     respaldo: null
   }
   }
