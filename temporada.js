@@ -67,6 +67,28 @@ window.TEMPORADA = {
       "Mario Zedan":7,
       "Stuardo Zimeri / Ian Zimeri":10,
       "Willy Zaid / Guille Zaid":9
+    }},
+    {n:4, puntos:{
+      "Andrés De León":7,
+      "Arturo Zimeri / Xavier Zimeri":7,
+      "Carlos Noguera / Ignacio Noguera":7,
+      "Edgar Bran / Andrés Bran":8,
+      "Edgar Sarceño / Mario Zirion":11,
+      "Federico Zimeri":10,
+      "Gerardo Villa e hijos":7,
+      "German García / Carlos Abreu":5,
+      "Gustavo Anzueto / Guille Anzueto":7,
+      "J.C. Sandoval / J.C. Sandoval Jr.":7,
+      "Javier Arzú Pérez":5,
+      "Joe Pasarelli / Everst Figueroa":4,
+      "José Gabriel Cummings":8,
+      "José Luis Contreras / Diego Contreras":11,
+      "José Porres":8,
+      "Luis Grazioso / Luigi Grazioso":6,
+      "Luis Herrera / Orlando Diab":7,
+      "Mario Zedan":8,
+      "Stuardo Zimeri / Ian Zimeri":7,
+      "Willy Zaid / Guille Zaid":9
     }}
   ]
 };
