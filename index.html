@@ -83,6 +83,9 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:Barlow,"Segoe UI
 .team{display:grid;grid-template-columns:1fr auto;align-items:center;gap:8px;padding:6px 0}
 .team + .team{border-top:1px dashed var(--line)}
 .tname{font-family:var(--cond);font-weight:700;font-size:24px;line-height:1.05}
+.trec{font-family:Barlow,Arial,sans-serif;font-weight:600;font-size:13px;color:var(--muted);margin-left:7px;vertical-align:3px;white-space:nowrap}
+.pkchip{display:inline-block;font-family:Barlow,Arial,sans-serif;font-size:10px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#fff;background:#2563eb;border-radius:999px;padding:2px 7px;margin-left:7px;vertical-align:4px;white-space:nowrap}
+.team.mine .tname{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}
 .tsub{display:block;font-family:Barlow,Arial,sans-serif;font-weight:500;font-size:12px;color:var(--muted);margin-top:1px}
 .tsub .ln{display:inline-block;background:var(--sheet-soft);color:var(--ink);font-weight:700;border-radius:3px;padding:0 5px;margin-right:6px}
 .tscore{font-family:var(--cond);font-weight:800;font-size:40px;line-height:1;min-width:48px;text-align:right}
@@ -303,7 +306,7 @@ button:focus-visible,select:focus-visible{outline:2px solid var(--orange);outlin
   <p class="note">Marcadores de ESPN, se actualizan solos cada minuto mientras hay juegos. Los juegos en curso cuentan como van. Local en mayúsculas.</p>
 </div>
 
-<script src="data.js?v=20261008b"></script>
+<script src="data.js?v=20261008c"></script>
 <script src="temporada.js?v=20261008a"></script>
 <script>
 (function(){
@@ -399,6 +402,8 @@ async function load(w){
         const comp=ev.competitions[0], st=(comp.status||ev.status).type;
         const by = n => comp.competitors.find(c=>low(c.team?.name)===low(n));
         g.date = new Date(ev.date); g.state = st.state;
+        const rec = c => (c?.records||[]).find(x=>x.type==="total"||x.name==="overall")?.summary || c?.records?.[0]?.summary || null;
+        g.rf = rec(by(g.fav)) || g.rf; g.rd = rec(by(g.dog)) || g.rd;
         if(st.state==="pre"){ g.fs=g.ds=null; g.detail=""; }
         else { g.fs=+by(g.fav).score; g.ds=+by(g.dog).score; g.detail = st.state==="post"?"Final":(st.shortDetail||"En juego"); }
       });
@@ -407,6 +412,7 @@ async function load(w){
   }
   if(w.source!=="espn"){ applyBackup(w); w.source="backup"; }
 }
+const initials = n => n.split("/")[0].trim().split(/\s+/).filter(w=>/^[A-ZÁÉÍÓÚÑ]/.test(w)).slice(0,2).map(w=>w[0]).join("") || "Pick";
 const cover = g => (g.state==="pre"||g.fs==null) ? null : ((g.fs-g.ds>g.ln)?low(g.fav):low(g.dog));
 function scoreFor(w,p){
   let fin=0,prov=0,lost=0,lostProv=0;
@@ -552,7 +558,7 @@ function render(){
     const favPicks = w.parts.filter(p=>low(p.picks[g.i])===low(g.fav)).length;
     const same = mine ? w.parts.filter(p=>low(p.picks[g.i])===low(mine)).length - 1 : 0;
     const chip = g.state==="pre" ? `<span class="chip">${esc(fmtKick(g.date))}</span>` : `<span class="chip ${g.state}">${esc(g.detail)}</span>`;
-    const row = (name,sub,score,isCov) => `<div class="team${isCov?" cov":""}"><div><span class="tname">${esc(name)}</span><span class="tsub">${sub}</span></div><div class="tscore">${score==null?"":score}</div></div>`;
+    const row = (name,sub,score,isCov,rec) => { const pk = mine && low(mine)===low(name); return `<div class="team${isCov?" cov":""}${pk?" mine":""}"><div><span class="tname">${esc(name)}</span>${rec?`<span class="trec">${esc(rec)}</span>`:""}${pk?`<span class="pkchip" title="Pick de ${esc(player.name)}">✓ ${esc(initials(player.name))}</span>`:""}<span class="tsub">${sub}</span></div><div class="tscore">${score==null?"":score}</div></div>`; };
     const r = cls[k];
     const res = !mine ? "" : r==="p" ? `·<small>Por jugarse</small>` : r==="w" ? `1<small>Acierto</small>` : r==="l" ? `0<small>Fallo</small>` : r==="pw" ? `1<small>Va cubriendo</small>` : `0<small>No va cubriendo</small>`;
     let margin="";
@@ -564,8 +570,8 @@ function render(){
     return `<article class="card ${mine?r:"nopick"}" aria-label="Juego ${k+1}">
       <div class="top"><span>${esc(fmtKick(g.date).split(",")[0])}</span>${chip}</div>
       <div class="teams">
-        ${row(g.fav,`<span class="ln">−${g.ln}</span>favorito`,g.fs,c===low(g.fav))}
-        ${row(g.dog,`<span class="ln">+${g.ln}</span>recibe puntos`,g.ds,c===low(g.dog))}
+        ${row(g.fav,`<span class="ln">−${g.ln}</span>favorito`,g.fs,c===low(g.fav),g.rf)}
+        ${row(g.dog,`<span class="ln">+${g.ln}</span>recibe puntos`,g.ds,c===low(g.dog),g.rd)}
       </div>
       <div class="margin">${margin}</div>
       <div class="mypick">${pickBox}</div>
