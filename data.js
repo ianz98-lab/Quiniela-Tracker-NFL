@@ -90,6 +90,27 @@ window.QUINIELA = {
       ["Stuardo Zimeri / Ian Zimeri", "BROWNS,COMMANDERS,Cardinals,TEXANS,Packers,BENGALS,EAGLES,Patriots,Jets,Titans,Dolphins,49ERS,RAIDERS,Chargers,Lions,SAINTS"],
       ["Willy Zaid / Guille Zaid", "BROWNS,COMMANDERS,Cardinals,TEXANS,Packers,BENGALS,Rams,BILLS,BEARS,Titans,VIKINGS,49ERS,RAIDERS,SEAHAWKS,Lions,Falcons"]
     ],
+    respaldo: {corte:"final", juegos:[[24, 27, "post"], [30, 13, "post"], [36, 24, "post"], [30, 34, "post"], [17, 14, "post"], [17, 22, "post"], [24, 20, "post"], [26, 29, "post"], [23, 12, "post"], [24, 18, "post"], [15, 10, "post"], [24, 14, "post"], [30, 27, "post"], [30, 23, "post"], [26, 32, "post"], [24, 45, "post"]]}
+  },
+  5: {
+    juegos: [
+      {fav:"COWBOYS", ln:10.5, dog:"Buccaneers", hora:"2026-10-09T00:15:00Z"},
+      {fav:"JAGUARS", ln:4.5, dog:"Eagles", hora:"2026-10-11T13:30:00Z"},
+      {fav:"Bears", ln:2.5, dog:"PACKERS", hora:"2026-10-11T17:00:00Z"},
+      {fav:"Bengals", ln:7.5, dog:"DOLPHINS", hora:"2026-10-11T17:00:00Z"},
+      {fav:"JETS", ln:2.5, dog:"Browns", hora:"2026-10-11T17:00:00Z"},
+      {fav:"Texans", ln:6.5, dog:"TITANS", hora:"2026-10-11T17:00:00Z"},
+      {fav:"STEELERS", ln:2.5, dog:"Colts", hora:"2026-10-11T17:00:00Z"},
+      {fav:"PATRIOTS", ln:3.5, dog:"Raiders", hora:"2026-10-11T17:00:00Z"},
+      {fav:"Vikings", ln:1.5, dog:"SAINTS", hora:"2026-10-11T17:00:00Z"},
+      {fav:"COMMANDERS", ln:3.5, dog:"Giants", hora:"2026-10-11T17:00:00Z"},
+      {fav:"Broncos", ln:3.5, dog:"CHARGERS", hora:"2026-10-11T20:05:00Z"},
+      {fav:"Lions", ln:5.5, dog:"CARDINALS", hora:"2026-10-11T20:25:00Z"},
+      {fav:"SEAHAWKS", ln:3.5, dog:"49ers", hora:"2026-10-11T20:25:00Z"},
+      {fav:"Ravens", ln:3.5, dog:"FALCONS", hora:"2026-10-12T00:20:00Z"},
+      {fav:"RAMS", ln:2.5, dog:"Bills", hora:"2026-10-13T00:15:00Z"}
+    ],
+    participantes: [],
     respaldo: null
   }
   }
