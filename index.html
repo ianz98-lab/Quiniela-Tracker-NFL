@@ -405,18 +405,7 @@ async function load(w){
         const rec = c => (c?.records||[]).find(x=>x.type==="total"||x.name==="overall")?.summary || c?.records?.[0]?.summary || null;
         g.rf = rec(by(g.fav)) || g.rf; g.rd = rec(by(g.dog)) || g.rd;
         if(st.state==="pre"){ g.fs=g.ds=null; g.detail=""; }
-        else {
-          // Regla de la quiniela: solo cuenta el tiempo regular; el tiempo extra no.
-          const per = +((comp.status||ev.status).period||0);
-          const reg = c => { const ls=(c?.linescores||[]).slice(0,4); return ls.length===4 ? ls.reduce((a,x)=>a+(+(x.value??x.displayValue)||0),0) : null; };
-          const F=by(g.fav), D=by(g.dog);
-          if(per>4){
-            // Si hubo OT, el tiempo regular terminó empatado: margen 0 y el juego ya está decidido.
-            let rf=reg(F), rd=reg(D);
-            if(rf==null||rd==null||rf!==rd){ const m=Math.min(+F.score,+D.score); rf=rd=m; }
-            g.fs=rf; g.ds=rd; g.state="post"; g.detail="Final (tiempo regular · OT no cuenta)";
-          } else { g.fs=+F.score; g.ds=+D.score; g.detail = st.state==="post"?"Final":(st.shortDetail||"En juego"); }
-        }
+        else { g.fs=+by(g.fav).score; g.ds=+by(g.dog).score; g.detail = st.state==="post"?"Final":(st.shortDetail||"En juego"); }
       });
       if(matched){ w.source="espn"; w.lastOk=new Date(); return; }
     }catch(e){}
