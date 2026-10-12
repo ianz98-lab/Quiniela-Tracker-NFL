@@ -133,6 +133,27 @@ window.QUINIELA = {
       ["Willy Zaid / Guille Zaid", "Buccaneers,JAGUARS,PACKERS,DOLPHINS,Browns,Texans,STEELERS,PATRIOTS,SAINTS,Giants,CHARGERS,CARDINALS,SEAHAWKS,FALCONS,RAMS"]
     ],
     respaldo: null
+  },
+  6: {
+    // LÍNEAS PROVISIONALES (mercado nflverse 12-oct): reemplazar por la línea del formulario de la quiniela
+    juegos: [
+      {fav:"Seahawks", ln:3, dog:"BRONCOS", hora:"2026-10-16T00:15:00Z", rf:"3-2", rd:"3-2"},
+      {fav:"JAGUARS", ln:3, dog:"Texans", hora:"2026-10-18T13:30:00Z", rf:"4-1", rd:"1-4"},
+      {fav:"Ravens", ln:4.5, dog:"BROWNS", hora:"2026-10-18T17:00:00Z", rf:"4-1", rd:"3-2"},
+      {fav:"EAGLES", ln:1.5, dog:"Panthers", hora:"2026-10-18T17:00:00Z", rf:"2-3", rd:"2-2"},
+      {fav:"Bears", ln:3, dog:"FALCONS", hora:"2026-10-18T17:00:00Z", rf:"3-2", rd:"2-3"},
+      {fav:"GIANTS", ln:1.5, dog:"Saints", hora:"2026-10-18T17:00:00Z", rf:"3-1-1", rd:"1-4"},
+      {fav:"PATRIOTS", ln:7, dog:"Jets", hora:"2026-10-18T17:00:00Z", rf:"3-2", rd:"2-3"},
+      {fav:"Steelers", ln:3, dog:"BUCCANEERS", hora:"2026-10-18T17:00:00Z", rf:"3-2", rd:"1-4"},
+      {fav:"COLTS", ln:7, dog:"Titans", hora:"2026-10-18T17:00:00Z", rf:"2-3", rd:"0-5"},
+      {fav:"RAMS", ln:12.5, dog:"Cardinals", hora:"2026-10-18T20:05:00Z", rf:"2-2", rd:"1-4"},
+      {fav:"Bills", ln:6, dog:"RAIDERS", hora:"2026-10-18T20:25:00Z", rf:"3-1", rd:"3-2"},
+      {fav:"CHIEFS", ln:8.5, dog:"Chargers", hora:"2026-10-18T20:25:00Z", rf:"4-0", rd:"0-5"},
+      {fav:"PACKERS", ln:1.5, dog:"Cowboys", hora:"2026-10-19T00:20:00Z", rf:"3-2", rd:"2-3"},
+      {fav:"49ERS", ln:7.5, dog:"Commanders", hora:"2026-10-20T00:15:00Z", rf:"5-0", rd:"1-3-1"}
+    ],
+    participantes: [],
+    respaldo: null
   }
   }
 };
