@@ -2,7 +2,7 @@
 // La semana en curso NO va aquí: se calcula en vivo desde data.js. Al cerrarla se congela aquí.
 window.TEMPORADA = {
   semanas: [
-    {n:1, puntos:{
+    {n:1, juegos:16, puntos:{
       "Andrés De León":8,
       "Arturo Zimeri / Xavier Zimeri":8,
       "Carlos Noguera / Ignacio Noguera":6,
@@ -24,7 +24,7 @@ window.TEMPORADA = {
       "Stuardo Zimeri / Ian Zimeri":11,
       "Willy Zaid / Guille Zaid":8
     }},
-    {n:2, puntos:{
+    {n:2, juegos:16, puntos:{
       "Andrés De León":11,
       "Arturo Zimeri / Xavier Zimeri":7,
       "Carlos Noguera / Ignacio Noguera":9,
