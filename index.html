@@ -182,6 +182,7 @@ body:not(.v-temporada) .only-season{display:none}
 .season .mv.up{color:var(--win)} .season .mv.dn{color:var(--loss)}
 .season .tot{font-family:var(--cond);font-weight:800;font-size:20px;min-width:46px;border-right:1px solid var(--line)}
 .season .gap{font-size:11px;color:var(--muted);min-width:40px}
+.season .pct{font-size:12px;font-weight:600;min-width:48px;white-space:nowrap}
 .season .wk{font-family:var(--cond);font-weight:700;font-size:15px;min-width:40px}
 .season .wk.best{background:var(--win-soft);color:var(--win)}
 .season .wk.live{background:repeating-linear-gradient(45deg,var(--sheet-soft) 0 4px,transparent 4px 8px)}
@@ -306,8 +307,8 @@ button:focus-visible,select:focus-visible{outline:2px solid var(--orange);outlin
   <p class="note">Marcadores de ESPN, se actualizan solos cada minuto mientras hay juegos. Los juegos en curso cuentan como van. Local en mayúsculas.</p>
 </div>
 
-<script src="data.js?v=20261012a"></script>
-<script src="temporada.js?v=20261008a"></script>
+<script src="data.js?v=20261012b"></script>
+<script src="temporada.js?v=20261012a"></script>
 <script>
 (function(){
 const Q = window.QUINIELA;
@@ -328,12 +329,12 @@ T.semanas.forEach(w=>{ if(!W[w.n]) W[w.n]={n:w.n,games:[],parts:[],hasGames:fals
 const closedPts = n => (T.semanas.find(w=>w.n===n)||{}).puntos || null;
 const weekNums = Object.keys(W).map(Number).sort((a,b)=>a-b);
 
-// Regla: la semana cambia al terminar el día (hora de Guatemala, UTC−6) de su último juego.
+// Regla: la semana cambia cuando termina su último juego (final en ESPN, o 4 h después de su kickoff si no hay conexión).
 function cutoff(w){
   if(!w.hasGames) return 0;
+  if(w.games.length && w.games.every(g=>g.state==="post")) return 1;
   const last = Math.max(...w.games.map(g=>g.date.getTime()));
-  const gt = new Date(last - 6*3600e3);
-  return Date.UTC(gt.getUTCFullYear(), gt.getUTCMonth(), gt.getUTCDate()+1, 6);
+  return last + 4*3600e3;
 }
 function currentWeek(){
   const withGames = weekNums.filter(n=>W[n].hasGames);
@@ -467,9 +468,9 @@ function seasonTable(){
   const weeks = [];
   for(let n=1;n<=maxW;n++){
     const pts = closedPts(n);
-    if(pts){ weeks.push({n,pts,live:false,loaded:true}); continue; }
+    if(pts){ const te=T.semanas.find(x=>x.n===n)||{}; weeks.push({n,pts,live:false,loaded:true,g:te.juegos||(W[n]&&W[n].games.length)||16}); continue; }
     const w = W[n];
-    if(w && w.parts.length && n===CUR){ const p={}; rankingFor(w).forEach(r=>p[r.name]=r.tot); weeks.push({n,pts:p,live:!done(w),loaded:true}); }
+    if(w && w.parts.length && n===CUR){ const p={}; rankingFor(w).forEach(r=>p[r.name]=r.tot); weeks.push({n,pts:p,live:!done(w),loaded:true,g:w.games.filter(x=>x.state==="post").length}); }
     else weeks.push({n,pts:{},live:false,loaded:false,pending:n>=CUR});
   }
   const names = [...new Set([...allNames, ...weeks.flatMap(w=>Object.keys(w.pts))])];
@@ -479,7 +480,8 @@ function seasonTable(){
   const lastN = loadedNs[loadedNs.length-1], prevN = loadedNs[loadedNs.length-2];
   const now = rankAt(lastN), before = prevN ? rankAt(prevN) : null;
   const best = weeks.map(w=>w.loaded ? Math.max(...names.map(n=>w.pts[n]??-1)) : null);
-  const rows = names.map(n=>({name:n,tot:cum(n,lastN),rank:now[n],mv:before?before[n]-now[n]:0,
+  const gTot = weeks.filter(w=>w.loaded&&w.n<=lastN).reduce((a,w)=>a+(w.g||0),0);
+  const rows = names.map(n=>({name:n,tot:cum(n,lastN),pct:gTot?Math.round(1000*cum(n,lastN)/gTot)/10:null,rank:now[n],mv:before?before[n]-now[n]:0,
     weeks:weeks.map((w,j)=>({v:w.loaded?(w.pts[n]??null):null,live:w.live,best:w.loaded&&!w.live&&w.pts[n]===best[j]&&best[j]>=0})),
     won:weeks.filter((w,j)=>w.loaded&&!w.live&&w.pts[n]===best[j]).length}))
     .sort((a,b)=>b.tot-a.tot||a.name.localeCompare(b.name));
@@ -491,10 +493,10 @@ function renderSeason(){
   const warn=$("swarn");
   warn.hidden = !missing.length;
   warn.textContent = missing.length ? `Faltan los aciertos de la${missing.length>1?"s":""} semana${missing.length>1?"s":""} ${missing.join(" y ")}; el acumulado todavía no las incluye.` : "";
-  const head = `<thead><tr><th class="sn">Participante</th><th>Total</th><th>Dif.</th>${weeks.map(w=>`<th>S${w.n}${w.live?"<br>en curso":w.pending?"<br>sin picks":""}</th>`).join("")}<th>Sem.<br>ganadas</th></tr></thead>`;
+  const head = `<thead><tr><th class="sn">Participante</th><th>Total</th><th>%</th><th>Dif.</th>${weeks.map(w=>`<th>S${w.n}${w.live?"<br>en curso":w.pending?"<br>sin picks":""}</th>`).join("")}<th>Sem.<br>ganadas</th></tr></thead>`;
   const body = `<tbody>${rows.map(r=>`<tr class="${r.name===selected?"me":""}">
     <td class="sn"><button type="button" data-n="${esc(r.name)}"><span class="r">${r.rank}</span><span class="n">${esc(r.name)}</span><span class="mv ${r.mv>0?"up":r.mv<0?"dn":""}">${r.mv>0?"▲"+r.mv:r.mv<0?"▼"+(-r.mv):""}</span></button></td>
-    <td class="tot">${r.tot}</td><td class="gap">${r.tot===lead?"—":"−"+(lead-r.tot)}</td>
+    <td class="tot">${r.tot}</td><td class="pct">${r.pct==null?"·":r.pct.toFixed(1)+"%"}</td><td class="gap">${r.tot===lead?"—":"−"+(lead-r.tot)}</td>
     ${r.weeks.map(c=>`<td class="wk${c.v==null?" na":""}${c.live?" live":""}${c.best?" best":""}">${c.v==null?"·":c.v}</td>`).join("")}
     <td class="wk">${r.won||""}</td></tr>`).join("")}</tbody>`;
   const t=$("season"); t.innerHTML=head+body;
@@ -507,7 +509,7 @@ function renderSeason(){
   const avg = played.length ? (played.reduce((a,c)=>a+c.v,0)/played.length).toFixed(1) : "–";
   $("sumh").textContent = me.name;
   $("sum").innerHTML = [
-    ["Lugar",`${me.rank}º${tied>1?" (empate)":""}`],["Total",me.tot],["Detrás del líder",me.tot===lead?"Líder":lead-me.tot],
+    ["Lugar",`${me.rank}º${tied>1?" (empate)":""}`],["Total",me.tot],["% de aciertos",me.pct==null?"–":me.pct.toFixed(1)+"%"],["Detrás del líder",me.tot===lead?"Líder":lead-me.tot],
     ["Promedio por semana",avg],["Mejor semana",bestW??"–"],["Semanas ganadas",me.won]
   ].map(([k,v])=>`<div><div class="k">${k}</div><div class="v">${v}</div></div>`).join("");
   return {me,tied,lastN};
