@@ -135,24 +135,44 @@ window.QUINIELA = {
     respaldo: null
   },
   6: {
-    // LÍNEAS PROVISIONALES (mercado nflverse 12-oct): reemplazar por la línea del formulario de la quiniela
     juegos: [
-      {fav:"Seahawks", ln:3, dog:"BRONCOS", hora:"2026-10-16T00:15:00Z", rf:"3-2", rd:"3-2"},
-      {fav:"JAGUARS", ln:3, dog:"Texans", hora:"2026-10-18T13:30:00Z", rf:"4-1", rd:"1-4"},
-      {fav:"Ravens", ln:4.5, dog:"BROWNS", hora:"2026-10-18T17:00:00Z", rf:"4-1", rd:"3-2"},
+      {fav:"Seahawks", ln:2.5, dog:"BRONCOS", hora:"2026-10-16T00:15:00Z", rf:"3-2", rd:"3-2"},
+      {fav:"JAGUARS", ln:3.5, dog:"Texans", hora:"2026-10-18T13:30:00Z", rf:"4-1", rd:"1-4"},
+      {fav:"Ravens", ln:3.5, dog:"BROWNS", hora:"2026-10-18T17:00:00Z", rf:"4-1", rd:"3-2"},
       {fav:"EAGLES", ln:1.5, dog:"Panthers", hora:"2026-10-18T17:00:00Z", rf:"2-3", rd:"2-2"},
-      {fav:"Bears", ln:3, dog:"FALCONS", hora:"2026-10-18T17:00:00Z", rf:"3-2", rd:"2-3"},
+      {fav:"FALCONS", ln:1.5, dog:"Bears", hora:"2026-10-18T17:00:00Z", rf:"2-3", rd:"3-2"},
       {fav:"GIANTS", ln:1.5, dog:"Saints", hora:"2026-10-18T17:00:00Z", rf:"3-1-1", rd:"1-4"},
-      {fav:"PATRIOTS", ln:7, dog:"Jets", hora:"2026-10-18T17:00:00Z", rf:"3-2", rd:"2-3"},
-      {fav:"Steelers", ln:3, dog:"BUCCANEERS", hora:"2026-10-18T17:00:00Z", rf:"3-2", rd:"1-4"},
-      {fav:"COLTS", ln:7, dog:"Titans", hora:"2026-10-18T17:00:00Z", rf:"2-3", rd:"0-5"},
+      {fav:"PATRIOTS", ln:7.5, dog:"Jets", hora:"2026-10-18T17:00:00Z", rf:"3-2", rd:"2-3"},
+      {fav:"COLTS", ln:7.5, dog:"Titans", hora:"2026-10-18T17:00:00Z", rf:"2-3", rd:"0-5"},
+      {fav:"Steelers", ln:2.5, dog:"BUCCANEERS", hora:"2026-10-18T17:00:00Z", rf:"3-2", rd:"1-4"},
       {fav:"RAMS", ln:12.5, dog:"Cardinals", hora:"2026-10-18T20:05:00Z", rf:"2-2", rd:"1-4"},
-      {fav:"Bills", ln:6, dog:"RAIDERS", hora:"2026-10-18T20:25:00Z", rf:"3-1", rd:"3-2"},
       {fav:"CHIEFS", ln:8.5, dog:"Chargers", hora:"2026-10-18T20:25:00Z", rf:"4-0", rd:"0-5"},
+      {fav:"Bills", ln:5.5, dog:"RAIDERS", hora:"2026-10-18T20:25:00Z", rf:"3-1", rd:"3-2"},
       {fav:"PACKERS", ln:1.5, dog:"Cowboys", hora:"2026-10-19T00:20:00Z", rf:"3-2", rd:"2-3"},
       {fav:"49ERS", ln:7.5, dog:"Commanders", hora:"2026-10-20T00:15:00Z", rf:"5-0", rd:"1-3-1"}
     ],
-    participantes: [],
+    participantes: [
+      ["Andrés De León", "Seahawks,Texans,BROWNS,Panthers,Bears,Saints,PATRIOTS,Titans,BUCCANEERS,Cardinals,Chargers,Bills,Cowboys,49ERS"],
+      ["Arturo Zimeri / Xavier Zimeri", "Seahawks,JAGUARS,BROWNS,Panthers,Bears,GIANTS,Jets,COLTS,BUCCANEERS,Cardinals,Chargers,Bills,PACKERS,49ERS"],
+      ["Carlos Noguera / Ignacio Noguera", "BRONCOS,Texans,BROWNS,Panthers,Bears,Saints,Jets,Titans,BUCCANEERS,Cardinals,Chargers,RAIDERS,Cowboys,Commanders"],
+      ["Edgar Bran / Andrés Bran", "Seahawks,JAGUARS,Ravens,EAGLES,Bears,GIANTS,PATRIOTS,Titans,Steelers,RAMS,Chargers,Bills,PACKERS,49ERS"],
+      ["Edgar Sarceño / Mario Zirion", "BRONCOS,JAGUARS,BROWNS,EAGLES,Bears,GIANTS,Jets,COLTS,Steelers,Cardinals,Chargers,RAIDERS,PACKERS,49ERS"],
+      ["Federico Zimeri", "BRONCOS,JAGUARS,Ravens,Panthers,FALCONS,GIANTS,PATRIOTS,Titans,Steelers,Cardinals,Chargers,RAIDERS,PACKERS,49ERS"],
+      ["Gerardo Villa e hijos", "Seahawks,Texans,BROWNS,Panthers,FALCONS,GIANTS,PATRIOTS,COLTS,Steelers,RAMS,CHIEFS,Bills,PACKERS,49ERS"],
+      ["German García / Carlos Abreu", "Seahawks,JAGUARS,Ravens,Panthers,FALCONS,Saints,PATRIOTS,Titans,BUCCANEERS,Cardinals,Chargers,Bills,PACKERS,49ERS"],
+      ["Gustavo Anzueto / Guille Anzueto", "Seahawks,JAGUARS,Ravens,Panthers,FALCONS,GIANTS,Jets,COLTS,Steelers,Cardinals,Chargers,RAIDERS,Cowboys,Commanders"],
+      ["J.C. Sandoval / J.C. Sandoval Jr.", "Seahawks,JAGUARS,Ravens,EAGLES,FALCONS,Saints,Jets,COLTS,BUCCANEERS,Cardinals,Chargers,RAIDERS,PACKERS,Commanders"],
+      ["Javier Arzú Pérez", "Seahawks,Texans,Ravens,Panthers,Bears,GIANTS,Jets,Titans,Steelers,Cardinals,Chargers,Bills,PACKERS,49ERS"],
+      ["Joe Pasarelli / Everst Figueroa", "Seahawks,Texans,Ravens,EAGLES,Bears,Saints,PATRIOTS,COLTS,Steelers,Cardinals,CHIEFS,Bills,PACKERS,49ERS"],
+      ["José Gabriel Cummings", "Seahawks,JAGUARS,BROWNS,EAGLES,Bears,Saints,PATRIOTS,Titans,Steelers,Cardinals,CHIEFS,Bills,PACKERS,Commanders"],
+      ["José Luis Contreras / Diego Contreras", "BRONCOS,JAGUARS,BROWNS,EAGLES,FALCONS,GIANTS,Jets,COLTS,BUCCANEERS,Cardinals,Chargers,Bills,PACKERS,Commanders"],
+      ["José Porres", "Seahawks,JAGUARS,Ravens,Panthers,Bears,GIANTS,PATRIOTS,COLTS,Steelers,RAMS,CHIEFS,Bills,PACKERS,49ERS"],
+      ["Luis Grazioso / Luigi Grazioso", "BRONCOS,JAGUARS,BROWNS,Panthers,Bears,Saints,Jets,COLTS,BUCCANEERS,Cardinals,CHIEFS,Bills,PACKERS,49ERS"],
+      ["Luis Herrera / Orlando Diab", "Seahawks,JAGUARS,BROWNS,EAGLES,Bears,Saints,Jets,Titans,Steelers,RAMS,CHIEFS,Bills,PACKERS,Commanders"],
+      ["Mario Zedan", "BRONCOS,Texans,Ravens,EAGLES,Bears,GIANTS,PATRIOTS,Titans,BUCCANEERS,RAMS,Chargers,Bills,PACKERS,Commanders"],
+      ["Stuardo Zimeri / Ian Zimeri", "Seahawks,JAGUARS,BROWNS,Panthers,FALCONS,Saints,Jets,COLTS,Steelers,Cardinals,Chargers,RAIDERS,PACKERS,Commanders"],
+      ["Willy Zaid / Guille Zaid", "Seahawks,JAGUARS,Ravens,EAGLES,FALCONS,Saints,PATRIOTS,COLTS,Steelers,Cardinals,CHIEFS,RAIDERS,Cowboys,49ERS"]
+    ],
     respaldo: null
   }
   }
