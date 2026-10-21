@@ -308,7 +308,7 @@ button:focus-visible,select:focus-visible{outline:2px solid var(--orange);outlin
 </div>
 
 <script src="data.js?v=20261015a"></script>
-<script src="temporada.js?v=20261012a"></script>
+<script src="temporada.js?v=20261021a"></script>
 <script>
 (function(){
 const Q = window.QUINIELA;
@@ -470,7 +470,7 @@ function seasonTable(){
     const pts = closedPts(n);
     if(pts){ const te=T.semanas.find(x=>x.n===n)||{}; weeks.push({n,pts,live:false,loaded:true,g:te.juegos||(W[n]&&W[n].games.length)||16}); continue; }
     const w = W[n];
-    if(w && w.parts.length && n===CUR){ const p={}; rankingFor(w).forEach(r=>p[r.name]=r.tot); weeks.push({n,pts:p,live:!done(w),loaded:true,g:w.games.filter(x=>x.state==="post").length}); }
+    if(w && w.parts.length && (n===CUR || w.source!=="none")){ const p={}; rankingFor(w).forEach(r=>p[r.name]=r.tot); weeks.push({n,pts:p,live:!done(w),loaded:true,g:w.games.filter(x=>x.state==="post").length}); }
     else weeks.push({n,pts:{},live:false,loaded:false,pending:n>=CUR});
   }
   const names = [...new Set([...allNames, ...weeks.flatMap(w=>Object.keys(w.pts))])];
@@ -641,7 +641,9 @@ let rT; window.addEventListener("resize",()=>{ clearTimeout(rT); rT=setTimeout((
 async function tick(){
   const nc = currentWeek();
   if(nc!==CUR){ const follow = week===CUR && !parseHash().week; CUR=nc; if(follow) week=CUR; fillWeeks(); }
-  const need = [...new Set([week, CUR])].map(n=>W[n]).filter(w=>w && w.hasGames && !(w.source!=="none" && done(w)));
+  // Semanas pasadas con picks que no están en temporada.js: se calculan solas con los marcadores finales.
+  const past = weekNums.filter(n=>n<CUR && W[n].parts.length && !closedPts(n));
+  const need = [...new Set([week, CUR, ...past])].map(n=>W[n]).filter(w=>w && w.hasGames && !(w.source!=="none" && done(w)));
   await Promise.all(need.map(load));
   render();
 }
