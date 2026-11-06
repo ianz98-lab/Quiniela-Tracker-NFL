@@ -426,7 +426,7 @@ function rankingFor(w){
   if(w.parts.length) r = w.parts.map(p=>({...p,...scoreFor(w,p)}));
   else { const pts=closedPts(w.n); r = pts ? Object.entries(pts).map(([name,v])=>({name,picks:[],fin:v,prov:0,tot:v,lost:null})) : []; }
   r.sort((a,b)=>b.tot-a.tot||b.fin-a.fin||a.name.localeCompare(b.name));
-  let rank=0,prev=null; r.forEach((x,i)=>{ if(x.tot!==prev){rank=i+1;prev=x.tot;} x.rank=rank; });
+  let rank=0,prev=null; r.forEach(x=>{ if(x.tot!==prev){rank++;prev=x.tot;} x.rank=rank; }); // puesto por puntaje: empatados comparten lugar y el siguiente puntaje es el lugar siguiente
   return r;
 }
 const done = w => w.hasGames && w.games.every(g=>g.state==="post");
@@ -475,7 +475,7 @@ function seasonTable(){
   }
   const names = [...new Set([...allNames, ...weeks.flatMap(w=>Object.keys(w.pts))])];
   const cum = (name,upto) => weeks.filter(w=>w.n<=upto).reduce((a,w)=>a+(w.pts[name]||0),0);
-  const rankAt = upto => { const arr=names.map(n=>({n,t:cum(n,upto)})).sort((a,b)=>b.t-a.t); const m={}; let rk=0,pv=null; arr.forEach((x,i)=>{ if(x.t!==pv){rk=i+1;pv=x.t;} m[x.n]=rk; }); return m; };
+  const rankAt = upto => { const arr=names.map(n=>({n,t:cum(n,upto)})).sort((a,b)=>b.t-a.t); const m={}; let rk=0,pv=null; arr.forEach(x=>{ if(x.t!==pv){rk++;pv=x.t;} m[x.n]=rk; }); return m; };
   const loadedNs = weeks.filter(w=>w.loaded).map(w=>w.n);
   const lastN = loadedNs[loadedNs.length-1], prevN = loadedNs[loadedNs.length-2];
   const now = rankAt(lastN), before = prevN ? rankAt(prevN) : null;
