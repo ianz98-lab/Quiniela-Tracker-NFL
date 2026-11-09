@@ -294,7 +294,7 @@ window.QUINIELA = {
       ["Luis Grazioso / Luigi Grazioso", "Jaguars,Bengals,Broncos,COLTS,Browns,COMMANDERS,DOLPHINS,Jets,Giants,CHARGERS,49ERS,PATRIOTS,Cardinals,Buccaneers,VIKINGS"],
       ["Luis Herrera / Orlando Diab", "RAVENS,Bengals,Broncos,COLTS,Browns,COMMANDERS,Lions,Jets,Giants,CHARGERS,Raiders,PATRIOTS,Cardinals,BEARS,Bills"],
       ["Mario Zedan", "Jaguars,Bengals,PANTHERS,Cowboys,Browns,Rams,Lions,CHIEFS,Giants,Texans,49ERS,PATRIOTS,Cardinals,BEARS,VIKINGS"],
-      ["Stuardo Zimeri / Ian Zimeri", "Jaguars,Bengals,Broncos,Cowboys,Browns,COMMANDERS,Lions,CHIEFS,Giants,Texans,49ERS,PATRIOTS,SEAHAWKS,Buccaneers,Bills"],
+      ["Stuardo Zimeri / Ian Zimeri", "Jaguars,Bengals,Broncos,Cowboys,Browns,COMMANDERS,Lions,CHIEFS,EAGLES,Texans,49ERS,PATRIOTS,SEAHAWKS,Buccaneers,Bills"],
       ["Willy Zaid / Guille Zaid", "Jaguars,Bengals,Broncos,Cowboys,Browns,COMMANDERS,Lions,Jets,Giants,Texans,Raiders,PATRIOTS,Cardinals,Buccaneers,Bills"]
     ],
     respaldo: null
