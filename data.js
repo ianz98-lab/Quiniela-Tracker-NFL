@@ -298,6 +298,47 @@ window.QUINIELA = {
       ["Willy Zaid / Guille Zaid", "Jaguars,Bengals,Broncos,Cowboys,Browns,COMMANDERS,Lions,Jets,Giants,Texans,Raiders,PATRIOTS,Cardinals,Buccaneers,Bills"]
     ],
     respaldo: null
+  },
+  10: {
+    juegos: [
+      {fav:"GIANTS", ln:1.5, dog:"Commanders", hora:"2026-11-13T01:15:00Z", rf:"5-2-1", rd:"2-5-1"},
+      {fav:"LIONS", ln:2.5, dog:"Patriots", hora:"2026-11-15T14:30:00Z", rf:"6-2", rd:"5-4"},
+      {fav:"Jaguars", ln:9.5, dog:"TITANS", hora:"2026-11-15T18:00:00Z", rf:"6-2", rd:"1-7"},
+      {fav:"Panthers", ln:1.5, dog:"SAINTS", hora:"2026-11-15T18:00:00Z", rf:"3-5", rd:"3-5"},
+      {fav:"Texans", ln:4.5, dog:"BROWNS", hora:"2026-11-15T18:00:00Z", rf:"3-5", rd:"5-4"},
+      {fav:"Bills", ln:8.5, dog:"JETS", hora:"2026-11-15T18:00:00Z", rf:"7-1", rd:"2-7"},
+      {fav:"COLTS", ln:2.5, dog:"Dolphins", hora:"2026-11-15T18:00:00Z", rf:"2-7", rd:"1-7"},
+      {fav:"PACKERS", ln:3.5, dog:"Vikings", hora:"2026-11-15T18:00:00Z", rf:"6-3", rd:"6-2"},
+      {fav:"Chiefs", ln:3.5, dog:"FALCONS", hora:"2026-11-15T18:00:00Z", rf:"6-2", rd:"3-6"},
+      {fav:"Seahawks", ln:2.5, dog:"RAIDERS", hora:"2026-11-15T21:05:00Z", rf:"5-4", rd:"4-5"},
+      {fav:"Rams", ln:6.5, dog:"CARDINALS", hora:"2026-11-15T21:05:00Z", rf:"5-4", rd:"3-6"},
+      {fav:"49ers", ln:4.5, dog:"COWBOYS", hora:"2026-11-15T21:25:00Z", rf:"7-1", rd:"4-5"},
+      {fav:"BENGALS", ln:3.5, dog:"Steelers", hora:"2026-11-16T01:20:00Z", rf:"6-2", rd:"6-2"},
+      {fav:"RAVENS", ln:4.5, dog:"Chargers", hora:"2026-11-17T01:15:00Z", rf:"4-5", rd:"0-8"}
+    ],
+    participantes: [
+      ["Andrés De León", "GIANTS,LIONS,Jaguars,SAINTS,Texans,Bills,COLTS,Vikings,Chiefs,Seahawks,Rams,49ers,Steelers,RAVENS"],
+      ["Arturo Zimeri / Xavier Zimeri", "GIANTS,LIONS,TITANS,Panthers,BROWNS,Bills,COLTS,Vikings,FALCONS,Seahawks,Rams,49ers,Steelers,RAVENS"],
+      ["Carlos Noguera / Ignacio Noguera", "GIANTS,LIONS,Jaguars,SAINTS,Texans,JETS,COLTS,Vikings,FALCONS,Seahawks,Rams,COWBOYS,Steelers,RAVENS"],
+      ["Edgar Bran / Andrés Bran", "GIANTS,LIONS,Jaguars,SAINTS,Texans,Bills,COLTS,Vikings,Chiefs,Seahawks,Rams,49ers,Steelers,RAVENS"],
+      ["Edgar Sarceño / Mario Zirion", "GIANTS,LIONS,Jaguars,SAINTS,BROWNS,Bills,COLTS,PACKERS,Chiefs,Seahawks,Rams,49ers,Steelers,Chargers"],
+      ["Federico Zimeri", "GIANTS,LIONS,TITANS,SAINTS,BROWNS,JETS,COLTS,PACKERS,Chiefs,RAIDERS,Rams,49ers,Steelers,RAVENS"],
+      ["Gerardo Villa e hijos", "GIANTS,LIONS,TITANS,SAINTS,Texans,Bills,COLTS,PACKERS,Chiefs,Seahawks,Rams,49ers,BENGALS,RAVENS"],
+      ["German García / Carlos Abreu", "GIANTS,LIONS,Jaguars,SAINTS,Texans,Bills,COLTS,PACKERS,Chiefs,Seahawks,Rams,49ers,BENGALS,Chargers"],
+      ["Gustavo Anzueto / Guille Anzueto", "GIANTS,LIONS,Jaguars,SAINTS,BROWNS,Bills,Dolphins,PACKERS,Chiefs,Seahawks,CARDINALS,49ers,Steelers,RAVENS"],
+      ["J.C. Sandoval / J.C. Sandoval Jr.", "GIANTS,LIONS,TITANS,Panthers,BROWNS,Bills,COLTS,Vikings,Chiefs,Seahawks,Rams,COWBOYS,BENGALS,Chargers"],
+      ["Javier Arzú Pérez", "Commanders,LIONS,TITANS,SAINTS,BROWNS,JETS,COLTS,Vikings,Chiefs,Seahawks,CARDINALS,49ers,Steelers,RAVENS"],
+      ["Joe Pasarelli / Everst Figueroa", "GIANTS,LIONS,Jaguars,SAINTS,Texans,Bills,COLTS,PACKERS,Chiefs,Seahawks,CARDINALS,49ers,BENGALS,RAVENS"],
+      ["José Gabriel Cummings", "Commanders,Patriots,TITANS,Panthers,BROWNS,JETS,Dolphins,PACKERS,FALCONS,RAIDERS,Rams,COWBOYS,Steelers,Chargers"],
+      ["José Luis Contreras / Diego Contreras", "GIANTS,LIONS,Jaguars,SAINTS,Texans,Bills,COLTS,PACKERS,Chiefs,RAIDERS,Rams,49ers,BENGALS,RAVENS"],
+      ["José Porres", "GIANTS,LIONS,Jaguars,SAINTS,Texans,Bills,Dolphins,Vikings,Chiefs,Seahawks,Rams,49ers,BENGALS,RAVENS"],
+      ["Luis Grazioso / Luigi Grazioso", "Commanders,LIONS,Jaguars,SAINTS,Texans,Bills,COLTS,Vikings,Chiefs,Seahawks,CARDINALS,49ers,BENGALS,RAVENS"],
+      ["Luis Herrera / Orlando Diab", "GIANTS,LIONS,Jaguars,SAINTS,Texans,Bills,Dolphins,PACKERS,FALCONS,Seahawks,CARDINALS,COWBOYS,Steelers,RAVENS"],
+      ["Mario Zedan", "Commanders,LIONS,TITANS,SAINTS,BROWNS,Bills,COLTS,PACKERS,Chiefs,Seahawks,CARDINALS,49ers,Steelers,RAVENS"],
+      ["Stuardo Zimeri / Ian Zimeri", "Commanders,LIONS,TITANS,SAINTS,BROWNS,JETS,COLTS,Vikings,Chiefs,Seahawks,Rams,49ers,Steelers,Chargers"],
+      ["Willy Zaid / Guille Zaid", "GIANTS,LIONS,Jaguars,SAINTS,Texans,JETS,COLTS,Vikings,Chiefs,Seahawks,Rams,COWBOYS,BENGALS,Chargers"]
+    ],
+    respaldo: null
   }
   }
 };
