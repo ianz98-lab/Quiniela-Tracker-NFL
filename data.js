@@ -339,6 +339,46 @@ window.QUINIELA = {
       ["Willy Zaid / Guille Zaid", "GIANTS,LIONS,Jaguars,SAINTS,Texans,JETS,COLTS,Vikings,Chiefs,Seahawks,Rams,COWBOYS,BENGALS,Chargers"]
     ],
     respaldo: null
+  },
+  11: {
+    juegos: [
+      {fav:"TEXANS", ln:10.5, dog:"Colts", hora:"2026-11-20T01:15:00Z", rf:"3-6", rd:"3-7"},
+      {fav:"BILLS", ln:16.5, dog:"Dolphins", hora:"2026-11-22T18:00:00Z", rf:"8-1", rd:"1-8"},
+      {fav:"BEARS", ln:10.5, dog:"Saints", hora:"2026-11-22T18:00:00Z", rf:"7-2", rd:"3-6"},
+      {fav:"Steelers", ln:4.5, dog:"EAGLES", hora:"2026-11-22T21:25:00Z", rf:"6-3", rd:"2-7"},
+      {fav:"PANTHERS", ln:2.5, dog:"Ravens", hora:"2026-11-22T18:00:00Z", rf:"4-5", rd:"4-6"},
+      {fav:"CHIEFS", ln:16.5, dog:"Cardinals", hora:"2026-11-22T18:00:00Z", rf:"7-2", rd:"3-7"},
+      {fav:"LIONS", ln:5.5, dog:"Buccaneers", hora:"2026-11-22T18:00:00Z", rf:"7-2", rd:"3-6"},
+      {fav:"COWBOYS", ln:7.5, dog:"Titans", hora:"2026-11-22T18:00:00Z", rf:"4-6", rd:"1-8"},
+      {fav:"CHARGERS", ln:3.5, dog:"Jets", hora:"2026-11-22T21:05:00Z", rf:"1-8", rd:"2-8"},
+      {fav:"BRONCOS", ln:9.5, dog:"Raiders", hora:"2026-11-22T21:25:00Z", rf:"7-2", rd:"4-6"},
+      {fav:"Jaguars", ln:5.5, dog:"GIANTS", hora:"2026-11-22T18:00:00Z", rf:"7-2", rd:"5-3-1"},
+      {fav:"49ERS", ln:3.5, dog:"Vikings", hora:"2026-11-23T01:20:00Z", rf:"8-1", rd:"7-2"},
+      {fav:"Bengals", ln:3.5, dog:"COMMANDERS", hora:"2026-11-24T01:15:00Z", rf:"7-2", rd:"3-5-1"}
+    ],
+    participantes: [
+      ["Andrés De León", "TEXANS,Dolphins,BEARS,Steelers,PANTHERS,Cardinals,Buccaneers,COWBOYS,Jets,BRONCOS,Jaguars,49ERS,Bengals"],
+      ["Arturo Zimeri / Xavier Zimeri", "Colts,BILLS,Saints,Steelers,PANTHERS,CHIEFS,Buccaneers,Titans,CHARGERS,Raiders,GIANTS,49ERS,COMMANDERS"],
+      ["Carlos Noguera / Ignacio Noguera", "TEXANS,Dolphins,BEARS,EAGLES,PANTHERS,Cardinals,LIONS,COWBOYS,Jets,BRONCOS,Jaguars,Vikings,Bengals"],
+      ["Edgar Bran / Andrés Bran", "TEXANS,Dolphins,BEARS,Steelers,PANTHERS,CHIEFS,LIONS,Titans,Jets,BRONCOS,Jaguars,Vikings,Bengals"],
+      ["Edgar Sarceño / Mario Zirion", "TEXANS,Dolphins,BEARS,EAGLES,PANTHERS,CHIEFS,LIONS,Titans,CHARGERS,BRONCOS,Jaguars,49ERS,Bengals"],
+      ["Federico Zimeri", "Colts,Dolphins,Saints,Steelers,PANTHERS,Cardinals,Buccaneers,Titans,CHARGERS,Raiders,GIANTS,49ERS,Bengals"],
+      ["Gerardo Villa e hijos", "Colts,BILLS,Saints,EAGLES,Ravens,CHIEFS,Buccaneers,COWBOYS,Jets,Raiders,Jaguars,49ERS,COMMANDERS"],
+      ["German García / Carlos Abreu", "Colts,BILLS,Saints,Steelers,PANTHERS,Cardinals,LIONS,COWBOYS,Jets,Raiders,Jaguars,49ERS,Bengals"],
+      ["Gustavo Anzueto / Guille Anzueto", "TEXANS,BILLS,BEARS,Steelers,Ravens,CHIEFS,LIONS,Titans,CHARGERS,BRONCOS,Jaguars,Vikings,Bengals"],
+      ["J.C. Sandoval / J.C. Sandoval Jr.", "Colts,Dolphins,BEARS,Steelers,PANTHERS,Cardinals,LIONS,Titans,CHARGERS,Raiders,Jaguars,Vikings,Bengals"],
+      ["Javier Arzú Pérez", "Colts,Dolphins,Saints,Steelers,PANTHERS,Cardinals,LIONS,Titans,CHARGERS,Raiders,Jaguars,49ERS,Bengals"],
+      ["Joe Pasarelli / Everst Figueroa", "Colts,Dolphins,BEARS,EAGLES,PANTHERS,CHIEFS,LIONS,COWBOYS,CHARGERS,Raiders,GIANTS,49ERS,COMMANDERS"],
+      ["José Gabriel Cummings", "Colts,BILLS,Saints,Steelers,Ravens,Cardinals,LIONS,COWBOYS,CHARGERS,Raiders,Jaguars,Vikings,Bengals"],
+      ["José Luis Contreras / Diego Contreras", "Colts,BILLS,Saints,Steelers,PANTHERS,Cardinals,LIONS,COWBOYS,CHARGERS,BRONCOS,Jaguars,49ERS,COMMANDERS"],
+      ["José Porres", "Colts,Dolphins,BEARS,Steelers,Ravens,CHIEFS,LIONS,Titans,Jets,BRONCOS,GIANTS,Vikings,Bengals"],
+      ["Luis Grazioso / Luigi Grazioso", "TEXANS,Dolphins,BEARS,Steelers,Ravens,Cardinals,LIONS,COWBOYS,CHARGERS,Raiders,GIANTS,49ERS,COMMANDERS"],
+      ["Luis Herrera / Orlando Diab", "TEXANS,Dolphins,BEARS,EAGLES,PANTHERS,Cardinals,LIONS,Titans,Jets,Raiders,Jaguars,Vikings,Bengals"],
+      ["Mario Zedan", "Colts,Dolphins,Saints,Steelers,PANTHERS,CHIEFS,LIONS,COWBOYS,Jets,BRONCOS,GIANTS,Vikings,Bengals"],
+      ["Stuardo Zimeri / Ian Zimeri", "Colts,Dolphins,Saints,Steelers,PANTHERS,CHIEFS,LIONS,Titans,CHARGERS,Raiders,Jaguars,49ERS,Bengals"],
+      ["Willy Zaid / Guille Zaid", "TEXANS,Dolphins,BEARS,Steelers,PANTHERS,Cardinals,LIONS,COWBOYS,Jets,BRONCOS,GIANTS,Vikings,Bengals"]
+    ],
+    respaldo: {juegos: [[26,3,"post"]]}
   }
   }
 };
